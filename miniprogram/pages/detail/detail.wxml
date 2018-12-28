@@ -42,5 +42,7 @@
 
   <!-- </view> -->
 
+  <text bindtap="modifynum">modifynum</text>
+
 
 </view>

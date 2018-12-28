@@ -56,16 +56,16 @@ Page({
     // 查询当前用户有无参加
     db.collection('event_joins').where({
       _openid: this.data.openid,
-      event_id:'XCYin4nnuWjciuy7'
+      event_id: 'XCYin4nnuWjciuy7'
     }).get({
-      success: res => { 
+      success: res => {
         if (res.data.length > 0) {
           this.setData({
             hasJoined: true
           })
         }
-        console.log('[数据库event_joins] [查询记录] 成功: ', res.data)
-        console.log('[数据库event_joins] [查询记录] 成功: ', res.data.length)
+        console.log('[数据库event_joins] [查询当前用户有无参加] 成功: ', res.data)
+
       },
       fail: err => {
         wx.showToast({
@@ -126,8 +126,29 @@ Page({
   onShareAppMessage: function() {
 
   },
-
-  onAdd: function () {
+  /**
+   * 为什么不生效？？
+   */
+  modifynum: function() {
+    const updateCount = 12;
+    const db = wx.cloud.database()
+    db.collection('event').doc('XCYin4nnuWjciuy7').update({
+      data: {
+        join_nums: updateCount,
+      },
+      success: res => {
+        console.log('[数据库event] [更新总人数] 成功: ', updateCount);
+        this.setData({
+          join_nums: updateCount
+        })
+      },
+      fail: err => {
+        icon: 'none',
+        console.error('[数据库event] [更新记录] 失败：', err)
+      }
+    });
+  },
+  onAdd: function() {
 
     const db = wx.cloud.database()
     db.collection('event_joins').add({
@@ -138,12 +159,50 @@ Page({
       success: res => {
         // 在返回结果中会包含新创建的记录的 _id
         this.setData({
-          hasJoined:true
-        })
+          hasJoined: true
+        });
+
+        //更新参与人数
+        db.collection('event_joins').where({
+          event_id: 'XCYin4nnuWjciuy7',
+        }).get({
+          success: res => {
+            const updateCount = res.data.length;
+            console.log('[数据库event_joins] [查询需更新总人数] 成功: ', updateCount);
+
+            db.collection('event').doc('XCYin4nnuWjciuy7').update({
+              data: {
+                join_nums: updateCount
+              },
+              success: res => {
+                console.log('[数据库event_joins] [更新总人数] 成功: ', updateCount);
+                this.setData({
+                  join_nums: updateCount
+                })
+              },
+              fail: err => {
+                icon: 'none',
+                console.error('[数据库event] [更新记录] 失败：', err)
+              }
+            });
+
+
+          },
+          fail: err => {
+            wx.showToast({
+              icon: 'none',
+              title: '查询记录失败'
+            })
+            console.error('[数据库] [查询记录] 失败：', err)
+          }
+        });
+
         wx.showToast({
           title: '报名成功',
         })
         console.log('[数据库event_joins] [新增记录] 成功，记录 _id: ', open_id)
+
+
       },
       fail: err => {
         wx.showToast({

@@ -14,14 +14,14 @@ Page({
   onLoad: function (options) {
     const db = wx.cloud.database()
     // 查询当前用户所有的 counters
-    db.collection('event_joins').where({
+    db.collection('event_success').where({
       event_id: 'XCYin4nnuWjciuy7'
     }).get({
       success: res => {
         this.setData({
           event_suc: JSON.stringify(res.data, null, 2),
         })
-        console.log('[数据库event_joins] [查询记录] 成功: ', res.data)
+        console.log('[数据库event_success] [查询记录] 成功: ', res.data)
       },
       fail: err => {
         wx.showToast({

@@ -5,7 +5,8 @@ Page({
    * 页面的初始数据
    */
   data: {
-    open_ids: ''
+    open_ids: '',
+    totals:''
   },
 
   /**
@@ -21,6 +22,7 @@ Page({
       success: res => {
         this.setData({
           open_ids: JSON.stringify(res.data, null, 2),
+          totals: res.data.length
         })
         console.log('[数据库event_joins] [查询记录] 成功: ', res.data)
       },

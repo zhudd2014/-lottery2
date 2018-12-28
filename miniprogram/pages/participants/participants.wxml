@@ -2,6 +2,7 @@
 <text>miniprogram/pages/participants/participants.wxml</text>
 
   <view>参与者详情页，根据open_id展示头像</view>
+  <text class="code" >总人数{{totals}}</text>
   <view>
     <text class="code" wx:if="{{open_ids}}">{{open_ids}}</text>
   </view>
