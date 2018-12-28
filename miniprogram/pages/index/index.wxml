@@ -1,43 +1,28 @@
-<!--index.wxml-->
-<view class="container">
-
-  <!-- 用户 openid -->
-  <view class="userinfo">
-    <button 
-      open-type="getUserInfo" 
-      bindgetuserinfo="onGetUserInfo"
-      class="userinfo-avatar"
-      style="background-image: url({{avatarUrl}})"
-    ></button>
-    <view>
-      <button class="userinfo-nickname" bindtap="onGetOpenid">点击获取 openid</button>
+<view class="indexPage">
+  <view class="loading" wx:if="{{!inited}}">
+    <image mode="aspectFit" src="https://cdn.readhub.cn/mina/lottery/loading.gif"></image>
+  </view>
+  <block wx:else>
+    <view class="scrollview" wx:if="{{!isEmpty}}">
+      <view class="group">
+        <image class="official-banner" mode="widthFix" src="https://cdn.readhub.cn/mina/lottery/selfhelp-banner@3x.png"></image>
+        <view class="group-list">
+          <view class="item" wx:for="{{lotteries}}" wx:key="id" bindtap='goToLottery' data-index="{{index}}">
+            <view>
+                <image mode="widthFix" src="{{item.banner}}" style='border-radius: 4px 4px 0px 0px;width: 100%;'></image>
+              </view>
+              <view class='lottery-info'>
+                <view class='sponsor'>{{item.sponsor}} 赞助</view>
+                <view class='prizes'>{{item.prizes}} ×1</view>
+                <view class='lottery-date'>{{item.lotteryDate}} 自动开奖</view>
+              </view>
+          </view>
+        </view>
+      </view>
     </view>
-  </view>
-
-
-  <!-- 上传图片 -->
-  <view class="uploader">
-    <view class="uploader-text" bindtap="doUpload">
-      <text>上传图片</text>
+    <view class="empty" wx:else>
+      <image mode="aspectFit" src="https://cdn.readhub.cn/mina/lottery/icn-empty-default-1@3x.png"></image>
+      <button bindtap="initPage" type="warn" wx:if="{{showReload}}">刷新页面</button>
     </view>
-    <view class="uploader-container" wx:if="{{imgUrl}}">
-      <image class="uploader-image" src="{{imgUrl}}" mode="aspectFit" bindtap="previewImg"></image>
-    </view>
-  </view>
-
-
-  <!-- 操作数据库 -->
-  <view class="uploader">
-    <navigator url="../databaseGuide/databaseGuide" open-type="navigate" class="uploader-text">
-      <text>前端操作数据库</text>
-    </navigator>
-  </view>
-
-  <!-- 新建云函数 -->
-  <view class="uploader">
-    <navigator url="../addFunction/addFunction" open-type="navigate" class="uploader-text">
-      <text>快速新建云函数</text>
-    </navigator>
-  </view>
-
+  </block>
 </view>
