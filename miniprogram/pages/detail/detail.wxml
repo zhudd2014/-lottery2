@@ -40,9 +40,6 @@
     <text>查看中奖名单</text>
   </navigator>
 
-  <!-- </view> -->
-
-  <text bindtap="modifynum">modifynum</text>
 
 
 </view>

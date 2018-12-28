@@ -37,7 +37,6 @@ Page({
           queryResult: JSON.stringify(res.data, null, 2),
           title: res.data[0].title,
           describe: res.data[0].describe,
-          join_nums: res.data[0].join_nums,
           pics: res.data[0].pics,
           prize_num: res.data[0].prize_num,
           status: res.data[0].status,
@@ -53,10 +52,13 @@ Page({
       }
     })
 
+    /**
+     * 此查询判断不准确
+     */
     // 查询当前用户有无参加
     db.collection('event_joins').where({
       _openid: this.data.openid,
-      event_id: 'XCYin4nnuWjciuy7'
+      event_id: 'XCYin4nnuWjciuy7',
     }).get({
       success: res => {
         if (res.data.length > 0) {
@@ -64,7 +66,29 @@ Page({
             hasJoined: true
           })
         }
-        console.log('[数据库event_joins] [查询当前用户有无参加] 成功: ', res.data)
+        console.log('[数据库event_joins] [查询当前用户有无参加] 成功: ', res.data.length)
+
+      },
+      fail: err => {
+        wx.showToast({
+          icon: 'none',
+          title: '查询记录失败'
+        })
+        console.error('[数据库] [查询记录] 失败：', err)
+      }
+    })
+
+    // 查询参加总数
+    db.collection('event_joins').where({
+      event_id: 'XCYin4nnuWjciuy7'
+    }).get({
+      success: res => {
+        if (res.data.length > 0) {
+          this.setData({
+            join_nums: res.data.length
+          })
+        }
+        console.log('[数据库event_joins] [查询总用户数] 成功: ', res.data.length)
 
       },
       fail: err => {
@@ -126,30 +150,12 @@ Page({
   onShareAppMessage: function() {
 
   },
-  /**
-   * 为什么不生效？？
-   */
-  modifynum: function() {
-    const updateCount = 12;
-    const db = wx.cloud.database()
-    db.collection('event').doc('XCYin4nnuWjciuy7').update({
-      data: {
-        join_nums: updateCount,
-      },
-      success: res => {
-        console.log('[数据库event] [更新总人数] 成功: ', updateCount);
-        this.setData({
-          join_nums: updateCount
-        })
-      },
-      fail: err => {
-        icon: 'none',
-        console.error('[数据库event] [更新记录] 失败：', err)
-      }
-    });
-  },
-  onAdd: function() {
 
+  /**
+   * 登记报名时，openid字段对不上，查询页查询不到
+   */
+  onAdd: function() {
+    const updateNum = this.data.join_nums + 1;
     const db = wx.cloud.database()
     db.collection('event_joins').add({
       data: {
@@ -159,43 +165,9 @@ Page({
       success: res => {
         // 在返回结果中会包含新创建的记录的 _id
         this.setData({
-          hasJoined: true
-        });
-
-        //更新参与人数
-        db.collection('event_joins').where({
-          event_id: 'XCYin4nnuWjciuy7',
-        }).get({
-          success: res => {
-            const updateCount = res.data.length;
-            console.log('[数据库event_joins] [查询需更新总人数] 成功: ', updateCount);
-
-            db.collection('event').doc('XCYin4nnuWjciuy7').update({
-              data: {
-                join_nums: updateCount
-              },
-              success: res => {
-                console.log('[数据库event_joins] [更新总人数] 成功: ', updateCount);
-                this.setData({
-                  join_nums: updateCount
-                })
-              },
-              fail: err => {
-                icon: 'none',
-                console.error('[数据库event] [更新记录] 失败：', err)
-              }
-            });
-
-
-          },
-          fail: err => {
-            wx.showToast({
-              icon: 'none',
-              title: '查询记录失败'
-            })
-            console.error('[数据库] [查询记录] 失败：', err)
-          }
-        });
+          hasJoined: true,
+          join_nums: updateNum
+        })
 
         wx.showToast({
           title: '报名成功',
