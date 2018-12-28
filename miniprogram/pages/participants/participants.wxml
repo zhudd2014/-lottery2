@@ -1,0 +1,7 @@
+<!--miniprogram/pages/participants/participants.wxml-->
+<text>miniprogram/pages/participants/participants.wxml</text>
+
+  <view>参与者详情页，根据open_id展示头像</view>
+  <view>
+    <text class="code" wx:if="{{open_ids}}">{{open_ids}}</text>
+  </view>
