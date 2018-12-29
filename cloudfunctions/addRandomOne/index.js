@@ -5,7 +5,7 @@ cloud.init()
 
 // 云函数入口函数
 exports.main = async(event, context) => {
-
+  console.log('[数据库addRandomOne] event: ', event)
   const wxContext = cloud.getWXContext()
 
   const db = cloud.database();

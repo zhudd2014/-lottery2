@@ -228,7 +228,12 @@ Page({
 
   goToUsers: function() {
     wx.navigateTo({
-      url: '../users/users'
+      url: '../users/users?event_id='+this.data.event_id
+    })
+  },
+  goEventSuc: function () {
+    wx.navigateTo({
+      url: '../eventSuc/eventSuc?event_id=' + this.data.event_id
     })
   },
   done: function() {

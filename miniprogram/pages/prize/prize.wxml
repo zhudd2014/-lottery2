@@ -68,9 +68,7 @@
   </view>
 
   <view wx:if="{{isAdmin}}">
-    <navigator url="../eventSuc/eventSuc" class="uploader-text ">
-      <button>查看中奖名单</button>
-    </navigator>
+      <button bindtap='goEventSuc'>查看中奖名单</button>
   </view>
 
 </view>

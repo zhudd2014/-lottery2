@@ -17,6 +17,12 @@ Page({
 
   //TODO 中奖名单改为云函数较好一点
   onLoad: function(options) {
+    console.log('[SucEnvPage]options: ' + options)
+    this.setData({
+      event_id: options.event_id
+    })
+    console.log('[SucEnvPage]options: ' + this.data.event_id)
+    
     wx.cloud.callFunction({
       name: 'getEventSuc',
       data: {
@@ -74,7 +80,7 @@ Page({
     wx.cloud.callFunction({
       name: 'addRandomOne',
       data: {
-        event_id:ths.data.event_id
+        event_id:this.data.event_id
       },
       success: res => {
         this.setData({

@@ -9,6 +9,7 @@ Page({
     count:0,
     users:[],
     userFlex: "flex: 0 0 10%;",
+    event_id:''
   },
 
   /**
@@ -16,7 +17,9 @@ Page({
    */
   onLoad: function (options) {
 
-
+    this.setData({
+      event_id: options.event_id
+    })
     // 查询参加总数
     wx.cloud.callFunction({
       name: 'getEventJoins',
