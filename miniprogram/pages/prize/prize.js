@@ -15,7 +15,8 @@ Page({
     joinUsers: [],
     event_suc: [],
     status: 0, //抽奖状态 0-参与中 1-待开奖 2-已开奖
-    isAdmin:false
+    isAdmin:false,
+    openid: ''
   },
 
   /**
@@ -28,7 +29,14 @@ Page({
         userInfo: userInfo
       })
     }
+    if (wx.getStorageSync('openid')) {
+      let openid = wx.getStorageSync('openid');
+      this.setData({
+        openid: openid
+      })
+    }
     
+    console.log('####openId: ', this.data.openid)
     let prize = JSON.parse(options.prize);
     this.setData({
       prize: prize
@@ -124,7 +132,7 @@ Page({
           icon: 'none',
           title: '调用失败',
         })
-        console.error('[云函数] [sum] 调用失败：', err)
+        console.error('[云函数] [getEventSuc] 调用失败：', err)
       }
     })
 
@@ -132,7 +140,7 @@ Page({
     wx.cloud.callFunction({
       name: 'getAdminOpenId',
       data: {
-        open_id: 'ovmWW5FHRmgEWUquGVNgiOMEdVV4',
+        a: this.data.openid,
       },
       success: res => {
         this.setData({
@@ -146,7 +154,7 @@ Page({
           icon: 'none',
           title: '调用失败',
         })
-        console.error('[云函数] [sum] 调用失败：', err)
+        console.error('[云函数] [getAdminOpenId] 调用失败：', err)
       }
     })
   },

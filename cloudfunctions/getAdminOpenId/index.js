@@ -5,9 +5,9 @@ cloud.init()
 
 // 云函数入口函数
 exports.main = async (event, context) => {
-  const a = event.a;
+
   const isAdmin = false;
-  if (a == 'ovmWW5FHRmgEWUquGVNgiOMEdVV4'){
+  if (event['a'] == 'ovmWW5FHRmgEWUquGVNgiOMEdVV4'){
      isAdmin = true;
   }
 
