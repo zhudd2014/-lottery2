@@ -9,10 +9,12 @@ exports.main = async (event, context) => {
   console.log(event)
   console.log(event.userInfo.openId)
   const isAdmin = false
-  if (event.userInfo.openId == 'ovmWW5FHRmgEWUquGVNgiOMEdVV4') {
+  if (event.userInfo.openId == 'ovmWW5FHRmgEWUquGVNgiOMEdVV4'){
+     isAdmin = true
+  }
+  if (event.userInfo.openId == 'ovmWW5Px9uqFJAXvD6nHBHM1tTHA') {
     isAdmin = true
   }
-
   return {
     isAdmin: isAdmin
   }
