@@ -9,7 +9,7 @@ Page({
   data: {
     imageStyle: "border-radius: 4px 4px 0px 0px;width: 100%; height: " + app.globalData.windowWidth / 2 + "px;",
     prize: {},
-    isParticipated:true,
+    isParticipated: false,
     joinUsers:7,
     joinUserCount:2048
   },
@@ -22,8 +22,94 @@ Page({
     this.setData({
       prize: prize
     })
+
+
+    const db = wx.cloud.database()
+    /**
+    * 此查询判断不准确
+    */
+    // 查询当前用户有无参加
+    db.collection('event_joins').where({
+      _openid: this.data.openid,
+      event_id: 'XCYin4nnuWjciuy7',
+    }).get({
+      success: res => {
+        if (res.data.length > 0) {
+          this.setData({
+            isParticipated: false
+          })
+        }
+        console.log('[数据库event_joins] [查询当前用户有无参加] 成功: ', res.data.length)
+
+      },
+      fail: err => {
+        wx.showToast({
+          icon: 'none',
+          title: '查询记录失败'
+        })
+        console.error('[数据库] [查询记录] 失败：', err)
+      }
+    })
+
+    // 查询参加总数
+    db.collection('event_joins').where({
+      event_id: 'XCYin4nnuWjciuy7'
+    }).get({
+      success: res => {
+        if (res.data.length > 0) {
+          this.setData({
+            joinUserCount: res.data.length
+          })
+        }
+        console.log('[数据库event_joins] [查询总用户数] 成功: ', res.data.length)
+
+      },
+      fail: err => {
+        wx.showToast({
+          icon: 'none',
+          title: '查询记录失败'
+        })
+        console.error('[数据库] [查询记录] 失败：', err)
+      }
+    })
   },
 
+
+  /**
+     * 登记报名时，openid字段对不上，查询页查询不到
+     */
+  onParticipate: function () {
+    const updateNum = this.data.join_nums + 1;
+    const db = wx.cloud.database()
+    db.collection('event_joins').add({
+      data: {
+        event_id: 'XCYin4nnuWjciuy7',
+        touxiang_pic: 'cloud://min520.6d69-min520/lottery/wx_tx_look.jpg',
+        nick_name: '张一',
+      },
+      success: res => {
+        // 在返回结果中会包含新创建的记录的 _id
+        this.setData({
+          hasJoined: true,
+          join_nums: updateNum
+        })
+
+        wx.showToast({
+          title: '报名成功',
+        })
+        console.log('[数据库event_joins] [新增记录] 成功，记录 _id: ', open_id)
+
+
+      },
+      fail: err => {
+        wx.showToast({
+          icon: 'none',
+          title: '报名成功，请勿重新报名'
+        })
+        console.error('[数据库] [新增记录] 失败：', err)
+      }
+    })
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
