@@ -10,8 +10,8 @@ Page({
     imageStyle: "border-radius: 4px 4px 0px 0px;width: 100%; height: " + app.globalData.windowWidth / 2 + "px;",
     prize: {},
     isParticipated: false,
-    joinUsers:7,
-    joinUserCount:2048
+    joinUserCount:0,
+    status:0,//抽奖状态 0-参与中 1-待开奖 2-已开奖
   },
 
   /**
@@ -84,7 +84,7 @@ Page({
       return
     }
 
-    const updateNum = this.data.join_nums + 1;
+    const updateNum = this.data.joinUserCount + 1;
     const db = wx.cloud.database()
     db.collection('event_joins').add({
       data: {
@@ -95,8 +95,8 @@ Page({
       success: res => {
         // 在返回结果中会包含新创建的记录的 _id
         this.setData({
-          hasJoined: true,
-          join_nums: updateNum
+          isParticipated: true,
+          joinUserCount: updateNum
         })
 
         wx.showToast({

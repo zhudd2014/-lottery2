@@ -6,8 +6,8 @@ Page({
    */
   data: {
     inited:true,
-    count:738,
-    users:738,
+    count:0,
+    users:100,
     userFlex: "flex: 0 0 10%;",
   },
 
@@ -15,7 +15,29 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    const db = wx.cloud.database()
+    // 查询参加总数
+    db.collection('event_joins').where({
+      event_id: 'XCYin4nnuWjciuy7'
+    }).get({
+      success: res => {
+        if (res.data.length > 0) {
+          this.setData({
+            count: res.data.length
+          })
+        }
 
+        console.log('[数据库event_joins] [查询总用户数] 成功: ', res.data.length)
+
+      },
+      fail: err => {
+        wx.showToast({
+          icon: 'none',
+          title: '查询记录失败'
+        })
+        console.error('[数据库] [查询记录] 失败：', err)
+      }
+    })
   },
 
   /**
