@@ -6,9 +6,11 @@ cloud.init()
 // 云函数入口函数
 exports.main = async (event, context) => {
 
-  const isAdmin = false;
-  if (event['a'] == 'ovmWW5FHRmgEWUquGVNgiOMEdVV4'){
-     isAdmin = true;
+  console.log(event)
+  console.log(event.userInfo.openId)
+  const isAdmin = false
+  if (event.userInfo.openId == 'ovmWW5FHRmgEWUquGVNgiOMEdVV4') {
+    isAdmin = true
   }
 
   return {
