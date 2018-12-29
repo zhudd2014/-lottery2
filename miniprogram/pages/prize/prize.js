@@ -78,7 +78,7 @@ Page({
   /**
      * 登记报名时，openid字段对不上，查询页查询不到
      */
-  onParticipate: function () {
+  joinGame: function () {
     const updateNum = this.data.join_nums + 1;
     const db = wx.cloud.database()
     db.collection('event_joins').add({
