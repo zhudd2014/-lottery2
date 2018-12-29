@@ -78,7 +78,7 @@ Page({
   goToLottery: function(e) {
     console.log(e.currentTarget.dataset.index)
     wx.navigateTo({
-      url: '../deployFunctions/deployFunctions',
+      url: '../users/users',
     })
   },
   getLotteries: async function() {

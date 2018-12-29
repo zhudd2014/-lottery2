@@ -7,7 +7,8 @@
     "pages/chooseLib/chooseLib",
     "pages/detail/detail",
     "pages/participants/participants",
-    "pages/eventSuc/eventSuc"
+    "pages/eventSuc/eventSuc",
+    "pages/users/users"
   ],
   "window": {
     "backgroundColor": "#F6F6F6",
