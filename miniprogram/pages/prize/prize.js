@@ -140,7 +140,7 @@ Page({
     wx.cloud.callFunction({
       name: 'getAdminOpenId',
       data: {
-        a: this.data.openid,
+        openid: this.data.openid,
       },
       success: res => {
         this.setData({
