@@ -3,8 +3,8 @@
   <image mode="widthFix" src="{{prize.banner}}" style="{{imageStyle}}" lazy-load='true'></image>
   <view class='lottery-info'>
     <view class='prizes'>{{prize.prizes}} ×{{prize.count}}</view>
-    <view class='lottery-date' wx:if="{{!prize.users}}">{{dateUtil.dateFormat(prize.lotteryDate)}} 自动开奖</view>
-    <view class='lottery-date' wx:else>满{{prize.users}}人 自动开奖</view>
+    <view class='lottery-date' wx:if="{{!prize.reaching_users}}">{{dateUtil.dateFormat(prize.lotteryDate)}} 自动开奖</view>
+    <view class='lottery-date' wx:else>满{{prize.reaching_users}}人 自动开奖</view>
     <!-- <view class='split'></view>
     <view class='sponsor'>
       <view>赞助商</view>
@@ -23,11 +23,11 @@
           <block wx:elif="{{!isParticipated && status == 0}}">
             <text>待开奖</text>
           </block>
-          <block wx:elif="{{status == 1 && event_suc_counts < 30}}">
-            <text>待开奖</text>
+          <block wx:elif="{{status == 1 && event_suc_counts == 30}}">
+            <text>已开奖</text>
           </block>
           <block wx:else>
-            <text>已开奖</text>
+            <text>待开奖</text>
           </block>
         </view>
       </button>

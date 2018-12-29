@@ -11,7 +11,7 @@ exports.main = async (event, context) => {
 
   // 查询当前用户所有的 counters
   let getEventJoinResult = await db.collection('event_joins').where({
-    event_id: 'XCYin4nnuWjciuy7',
+    event_id: event.event_id,
   }).orderBy('level', 'desc').limit(100).get({
     success: res => {
       return res;

@@ -16,6 +16,7 @@ Page({
     event_suc: [],
     event_suc_counts: 0,
     status: 0, //抽奖状态 0-参与中 1-待开奖 2-已开奖
+    event_id: '',
     isAdmin: false,
     openid: ''
   },
@@ -39,9 +40,11 @@ Page({
 
     console.log('####openId: ', this.data.openid)
     let prize = JSON.parse(options.prize);
+    console.log('####prize: ', prize)
     this.setData({
       prize: prize,
-      status: prize.status
+      status: prize.status,
+      event_id: prize.event_id
     })
 
 
@@ -52,7 +55,7 @@ Page({
     // 查询当前用户有无参加
     db.collection('event_joins').where({
       _openid: this.data.openid,
-      event_id: 'XCYin4nnuWjciuy7',
+      event_id: this.data.event_id,
     }).get({
       success: res => {
         if (res.data.length > 0) {
@@ -76,7 +79,7 @@ Page({
     wx.cloud.callFunction({
       name: 'getEventJoins',
       data: {
-        event_id: 'XCYin4nnuWjciuy7',
+        event_id: this.data.event_id,
       },
       success: res => {
         console.log('[云函数getEventJoins调用] 成功: ', res.result)
@@ -93,11 +96,11 @@ Page({
         console.error('[云函数] [getEventJoins] 调用失败：', err)
       }
     })
-    
+
 
     //查询最近七个头像
     db.collection('event_joins').where({
-      event_id: 'XCYin4nnuWjciuy7'
+      event_id: this.data.event_id
     }).orderBy('join_time', 'desc').limit(7).get({
       success: res => {
         if (res.data.length > 0) {
@@ -118,7 +121,7 @@ Page({
     wx.cloud.callFunction({
       name: 'getEventSuc',
       data: {
-        event_id: 'XCYin4nnuWjciuy7',
+        event_id: this.data.event_id,
       },
       success: res => {
         this.setData({
@@ -174,7 +177,7 @@ Page({
     const db = wx.cloud.database()
     db.collection('event_joins').add({
       data: {
-        event_id: 'XCYin4nnuWjciuy7',
+        event_id: this.data.event_id,
         touxiang_pic: this.data.userInfo.avatarUrl,
         nick_name: this.data.userInfo.nickName,
         level: 0,
@@ -202,6 +205,19 @@ Page({
         console.error('[数据库] [新增记录] 失败：', err)
       }
     })
+
+    //参与者到指定人数时，设置为待开奖
+    if (this.data.joinUserCount >= prize) {
+      wx.cloud.callFunction({
+        name: 'updateLotteryPending',
+        data: {
+          event_id: this.data.event_id,
+        },
+        success: res => {
+
+        }
+      })
+    }
   },
   /**
    * 生命周期函数--监听页面初次渲染完成

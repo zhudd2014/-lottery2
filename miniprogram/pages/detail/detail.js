@@ -15,6 +15,7 @@ Page({
     status: 0,
     queryResult: '',
     hasJoined: false,
+    event_id:''
   },
 
   /**
@@ -27,10 +28,11 @@ Page({
       })
     }
 
+    console.log('######options ', options)
     const db = wx.cloud.database()
     // 查询当前用户所有的 counters
     db.collection('lotteries').where({
-      lottery_index: 'XCYin4nnuWjciuy7',
+      event_id: this.data.event_id,
     }).get({
       success: res => {
         this.setData({
@@ -58,7 +60,7 @@ Page({
     // 查询当前用户有无参加
     db.collection('event_joins').where({
       _openid: this.data.openid,
-      event_id: 'XCYin4nnuWjciuy7',
+      event_id: this.data.event_id,
     }).get({
       success: res => {
         if (res.data.length > 0) {
@@ -80,7 +82,7 @@ Page({
 
     // 查询参加总数
     db.collection('event_joins').where({
-      event_id: 'XCYin4nnuWjciuy7'
+      event_id: this.data.event_id
     }).get({
       success: res => {
         if (res.data.length > 0) {
@@ -159,7 +161,7 @@ Page({
     const db = wx.cloud.database()
     db.collection('event_joins').add({
       data: {
-        event_id: 'XCYin4nnuWjciuy7',
+        event_id: this.data.event_id,
         touxiang_pic:'cloud://min520.6d69-min520/lottery/wx_tx_look.jpg',
         nick_name:'张一',
       },

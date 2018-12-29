@@ -8,7 +8,7 @@ Page({
     event_suc: [],
     event_suc_counts:0,
     isAdmin:false,
-    event_id:'XCYin4nnuWjciuy7'
+    event_id:''
   },
 
   /**
@@ -20,7 +20,7 @@ Page({
     wx.cloud.callFunction({
       name: 'getEventSuc',
       data: {
-        event_id: 'XCYin4nnuWjciuy7',
+        event_id: this.data.event_id,
       },
       success: res => {
         this.setData({
@@ -63,31 +63,6 @@ Page({
 
 
   /**
-   * 生命周期函数--监听页面加载
-   */
-  // onLoad: function(options) {
-  //   const db = wx.cloud.database()
-  //   // 查询当前用户所有的 counters
-  //   db.collection('event_success').where({
-  //     event_id: 'XCYin4nnuWjciuy7'
-  //   }).get({
-  //     success: res => {
-  //       this.setData({
-  //         event_suc: JSON.stringify(res.data, null, 2),
-  //       })
-  //       console.log('[数据库event_success] [查询记录] 成功: ', res.data)
-  //     },
-  //     fail: err => {
-  //       wx.showToast({
-  //         icon: 'none',
-  //         title: '查询记录失败'
-  //       })
-  //       console.error('[数据库] [查询记录] 失败：', err)
-  //     }
-  //   })
-  // },
-
-  /**
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function() {
@@ -99,7 +74,7 @@ Page({
     wx.cloud.callFunction({
       name: 'addRandomOne',
       data: {
-
+        event_id:ths.data.event_id
       },
       success: res => {
         this.setData({

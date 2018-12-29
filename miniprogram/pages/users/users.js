@@ -21,7 +21,7 @@ Page({
     wx.cloud.callFunction({
       name: 'getEventJoins',
       data: {
-        event_id: 'XCYin4nnuWjciuy7',
+        event_id: this.data.event_id,
       },
       success: res => {
         console.log('[云函数getEventJoins调用] 成功: ', res.result)

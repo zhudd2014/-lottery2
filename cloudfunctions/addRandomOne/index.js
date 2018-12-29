@@ -11,7 +11,7 @@ exports.main = async(event, context) => {
   const db = cloud.database();
 
   let res = await db.collection('event_joins').where({
-    event_id: 'XCYin4nnuWjciuy7',
+    event_id: event.event_id,
     level: 0
   }).get({
     success: res => {
