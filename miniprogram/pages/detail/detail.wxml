@@ -22,7 +22,7 @@
 
 
   <view wx:if="{{prize == 0 && !hasJoined }}">
-    <text bindtap="onAdd">参加抽奖</text>
+    <button bindtap="onAdd">参加抽奖</button>
   </view>
 
   <view wx:if="{{prize == 0 && hasJoined }}">
@@ -31,13 +31,13 @@
 
 
   <navigator url="../participants/participants" class="uploader-text ">
-    <text>已有{{join_nums}}参与，查看全部</text>
+    <button>已有{{join_nums}}参与，查看全部</button>
   </navigator>
 
   <!-- </view>
   <view wx:if="{{prize==1 }} "> -->
   <navigator url="../eventSuc/eventSuc" class="uploader-text ">
-    <text>查看中奖名单</text>
+    <button>查看中奖名单</button>
   </navigator>
 
 

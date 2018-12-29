@@ -160,7 +160,6 @@ Page({
     db.collection('event_joins').add({
       data: {
         event_id: 'XCYin4nnuWjciuy7',
-        join_openid: this.data.openid
       },
       success: res => {
         // 在返回结果中会包含新创建的记录的 _id
