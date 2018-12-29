@@ -63,5 +63,7 @@
   <navigator url="../eventSuc/eventSuc" class="uploader-text ">
     <button>查看中奖名单</button>
   </navigator>
-
+</view>
+<view bindtap='addRandomOne'>  
+    <button>随机设置抽奖人</button>
 </view>

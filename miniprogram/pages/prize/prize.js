@@ -19,7 +19,7 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
+  onLoad: function(options) {
     let prize = JSON.parse(options.prize);
     this.setData({
       prize: prize
@@ -28,8 +28,8 @@ Page({
 
     const db = wx.cloud.database()
     /**
-    * 此查询判断不准确
-    */
+     * 此查询判断不准确
+     */
     // 查询当前用户有无参加
     db.collection('event_joins').where({
       _openid: this.data.openid,
@@ -78,10 +78,10 @@ Page({
 
 
   /**
-     * 登记报名时，openid字段对不上，查询页查询不到
-     */
-  joinGame: function () {
-    
+   * 登记报名时，openid字段对不上，查询页查询不到
+   */
+  joinGame: function() {
+
     if (this.data.isParticipated) {
       return
     }
@@ -121,11 +121,47 @@ Page({
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function () {
+  onReady: function() {
 
   },
+  //随机设置一位抽奖者
+  addRandomOne: function() {
 
-  goToUsers:function(){
+    const db = wx.cloud.database();
+
+    db.collection('event_joins').where({
+      event_id: 'XCYin4nnuWjciuy7',
+      level: 0
+    }).get({
+      success: res => {
+        const length = res.data.length;
+
+        //随机一个 更新为中奖
+        const random = Math.floor(Math.random() * (length + 1));
+        console.log('[数据库event_joins] [查询未中奖人] 成功，人数: ', length)
+        console.log('[数据库event_joins] [生成随机数] 成功，设置中将人: ', random)
+
+        const updateId = res.data[random]._id;
+        //取中奖人的数据
+        console.log('[数据库event_joins] [生成随机数] 成功，中奖人id ', updateId)
+        
+        db.collection('event_joins').doc(updateId).update({
+
+          data: {
+            level: 1,
+          },
+          success(res) {
+            console.log(res)
+          }
+        })
+
+      }
+
+    });
+  },
+
+
+  goToUsers: function() {
     wx.navigateTo({
       url: '../users/users'
     })
@@ -133,7 +169,7 @@ Page({
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function () {
+  onShareAppMessage: function() {
 
   },
 })
