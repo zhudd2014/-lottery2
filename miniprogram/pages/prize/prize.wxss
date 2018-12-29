@@ -1,0 +1,160 @@
+.container{
+  background-color: #f0f0f0;
+  width: 100%;
+  height: 100%;
+  font-family: "PingFangSC-Regular";
+}
+
+.loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 80%;
+  margin-top: 70%;
+}
+
+.loading image {
+  width: 28px;
+  height: 28px;
+}
+
+.lottery-info{
+  margin-bottom: 15px;
+  border-radius: 4px;
+  overflow: hidden;
+  background-color: #fff;
+}
+
+.prizes {
+  font-size: 15px;
+  color: rgba(0, 0, 0, 0.9);
+  line-height: 1.59;
+  margin-top: 10px;
+  margin-left: 20px;
+  margin-bottom: 10px;
+}
+
+.lottery-date {
+  margin-left: 20px;
+  margin-bottom: 10px;
+  font-size: 11px;
+  color: #808080;
+}
+
+.split{
+  width: 100%;
+  height: 1rpx;
+  background-color: #dbd3d3;
+  margin-left: 20px;
+}
+
+.sponsor {
+  font-size: 14px;
+  color: #000;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 20px;
+}
+
+.join-normal-lottery button {
+    border-radius: 50%;
+    background: linear-gradient(to bottom,#d35648,#ce4d3f);
+    font-size: 16px;
+    font-weight: bolder;
+    color: #fff;
+    text-align: center;
+    width: 110px;
+    height: 110px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2.5px 6px 0 rgba(0,0,0,0.08);
+    position: relative;
+}
+
+.join-normal-lottery button .animate-bg {
+    position: absolute;
+    opacity: 1;
+    transform: scale(0);
+    border: 3px solid rgba(255,255,255,0.8);
+    width: 104px;
+    height: 104px;
+    border-radius: 50%;
+    z-index: 500;
+    left: 0px;
+    top: 0px;
+}
+
+.join-normal-lottery button.hover {
+    background: #b24539;
+}
+
+.join-normal-lottery button:after {
+    border-radius: 50%;
+    content: "";
+    position: absolute;
+    box-shadow: 0 3px 8px -2px rgba(0,0,0,0.25);
+    top: 0;
+    left: 0;
+    border: solid 4px rgba(0,0,0,0.1);
+    box-sizing: border-box;
+    width: 200%;
+    height: 200%;
+    transform: scale(.5);
+    transform-origin: left top;
+}
+
+.join-normal-lottery button.joined .animate-bg {
+    opacity: 1;
+    transform: scale(.9);
+    transform-origin: 50% 50% 0px;
+    border: 3px solid rgba(255,255,255,0.15);
+}
+
+.join-normal-lottery button.joined text {
+    color: rgba(255,255,255,0.4);
+}
+
+.join-normal-lottery button.joined.funny text {
+    color: rgba(0,0,0,0.25);
+}
+
+.join-normal-lottery button.joined.hover {
+    background: linear-gradient(to bottom,#d35648,#ce4d3f);
+}
+
+.join-normal-lottery button.disable {
+    opacity: .3;
+}
+
+.join-normal-lottery button.disable text {
+    opacity: .5;
+}
+
+.join-normal-lottery button.disable.hover {
+    background: linear-gradient(to bottom,#d35648,#ce4d3f);
+}
+
+.join-normal-lottery button .content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.join-normal-lottery button.funny {
+    background: #e5c527;
+    color: rgba(0,0,0,0.7);
+}
+
+.join-normal-lottery button.funny.hover {
+    background: #ceaf16;
+}
+
+.join-normal-lottery button .icon {
+    width: 33px;
+    height: 33px;
+}

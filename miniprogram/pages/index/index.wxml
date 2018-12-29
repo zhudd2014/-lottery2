@@ -10,7 +10,7 @@
         <view class="group-list">
           <view class="item" wx:for="{{lotteries}}" wx:key="id" bindtap='goToLottery' data-index="{{index}}">
             <view>
-                <image mode="widthFix" src="{{item.banner}}" style='border-radius: 4px 4px 0px 0px;width: 100%;' lazy-load='true'></image>
+                <image mode="widthFix" src="{{item.banner}}" style="{{imageStyle}}" lazy-load='true'></image>
               </view>
               <view class='lottery-info'>
                 <view class='sponsor'>{{item.sponsor}} 赞助</view>
@@ -34,6 +34,11 @@
   <view class="uploader">
     <navigator url="../detail/detail" open-type="navigate" class="uploader-text">
       <button>调到详情页</button>
+    </navigator>
+  </view>
+  <view class="uploader">
+    <navigator url="../users/users" open-type="navigate" class="uploader-text">
+      <button>调到参与用户页</button>
     </navigator>
   </view>
 </view>

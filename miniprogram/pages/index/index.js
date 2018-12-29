@@ -11,6 +11,7 @@ Page({
     requestResult: '',
     inited: true,
     isEmpty: false,
+    imageStyle: "border-radius: 4px 4px 0px 0px;width: 100%; height: " + app.globalData.windowWidth / 2 + "px;",
     lotteries: []
   },
 
@@ -39,7 +40,7 @@ Page({
       }
     })
   },
-  onShow: async function () {
+  onShow: async function() {
     let lotteries = await this.getLotteries()
     this.setData({
       lotteries: lotteries
@@ -76,9 +77,10 @@ Page({
     })
   },
   goToLottery: function(e) {
+    let prize = this.data.lotteries[e.currentTarget.dataset.index];
     console.log(e.currentTarget.dataset.index)
     wx.navigateTo({
-      url: '../users/users',
+      url: '../prize/prize?prize=' + JSON.stringify(prize)
     })
   },
   getLotteries: async function() {

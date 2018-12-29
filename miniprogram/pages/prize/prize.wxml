@@ -1,0 +1,32 @@
+<wxs module="dateUtil" src="../../wxs/format.wxs"></wxs>
+<view class='container'>
+  <image mode="widthFix" src="{{prize.banner}}" style="{{imageStyle}}" lazy-load='true'></image>
+  <view class='lottery-info'>
+    <view class='prizes'>{{prize.prizes}} ×{{prize.count}}</view>
+    <view class='lottery-date' wx:if="{{!prize.users}}">{{dateUtil.dateFormat(prize.lotteryDate)}} 自动开奖</view>
+    <view class='lottery-date' wx:else>满{{prize.users}}人 自动开奖</view>
+    <!-- <view class='split'></view>
+    <view class='sponsor'>
+      <view>赞助商</view>
+      <view>{{prize.sponsor}}</view>
+    </view> -->
+  </view>
+
+  <view class="join-normal-lottery">
+    <form reportSubmit bindsubmit="joinGame">
+      <button animation="{{btnAnimationData}}" class="{{game.theme}} {{isParticipated?'joined':''}} {{game.condition_error?'disable':''}}" formType="submit" hoverClass="hover" hoverStartTime="{{0}}" hoverStayTime="{{0}}">
+        <view animation="{{bgAnimationData}}" class="animate-bg"></view>
+        <view class="content">
+          <block wx:if="{{!isParticipated}}">
+            <image class="icon" src="https://cdn.readhub.cn/mina/lottery/icn-pi-join@3x.png" wx:if="{{game.theme==='funny'}}"></image>
+            <text>参与抽奖</text>
+          </block>
+          <block wx:else>
+            <image class="icon" src="https://cdn.readhub.cn/mina/lottery/icn-pi-joined@3x.png" wx:if="{{game.theme==='funny'}}"></image>
+            <text>{{game.theme==='funny'?'已参与':'待开奖'}}</text>
+          </block>
+        </view>
+      </button>
+    </form>
+  </view>
+</view>
