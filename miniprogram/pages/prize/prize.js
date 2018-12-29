@@ -14,8 +14,9 @@ Page({
     joinUserCount: 0,
     joinUsers: [],
     event_suc: [],
+    event_suc_counts: 0,
     status: 0, //抽奖状态 0-参与中 1-待开奖 2-已开奖
-    isAdmin:false,
+    isAdmin: false,
     openid: ''
   },
 
@@ -23,7 +24,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-    if (wx.getStorageSync('userInfo')){
+    if (wx.getStorageSync('userInfo')) {
       let userInfo = JSON.parse(wx.getStorageSync('userInfo'));
       this.setData({
         userInfo: userInfo
@@ -35,7 +36,7 @@ Page({
         openid: openid,
       })
     }
-    
+
     console.log('####openId: ', this.data.openid)
     let prize = JSON.parse(options.prize);
     this.setData({
@@ -215,7 +216,7 @@ Page({
       url: '../users/users'
     })
   },
-  done:function(){
+  done: function() {
 
   },
   /**

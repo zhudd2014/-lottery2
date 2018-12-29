@@ -19,7 +19,7 @@ Page({
     // 查询参加总数
     db.collection('event_joins').where({
       event_id: 'XCYin4nnuWjciuy7'
-    }).get({
+    }).limit(100).get({
       success: res => {
         if (res.data.length > 0) {
           this.setData({

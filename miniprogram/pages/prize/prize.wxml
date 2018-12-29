@@ -23,7 +23,7 @@
           <block wx:elif="{{!isParticipated && status == 0}}">
             <text>待开奖</text>
           </block>
-          <block wx:elif="{{!isParticipated && status == 1}}">
+          <block wx:elif="{{status == 1 && event_suc_counts < 30}}">
             <text>待开奖</text>
           </block>
           <block wx:else>
