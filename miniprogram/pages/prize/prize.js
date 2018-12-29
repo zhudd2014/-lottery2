@@ -47,7 +47,7 @@ Page({
 
     const db = wx.cloud.database()
     /**
-     * 此查询判断不准确
+     * TODO 此查询判断不准确
      */
     // 查询当前用户有无参加
     db.collection('event_joins').where({
@@ -73,26 +73,27 @@ Page({
     })
 
     // 查询参加总数
-    db.collection('event_joins').where({
-      event_id: 'XCYin4nnuWjciuy7'
-    }).get({
+    wx.cloud.callFunction({
+      name: 'getEventJoins',
+      data: {
+        event_id: 'XCYin4nnuWjciuy7',
+      },
       success: res => {
-        if (res.data.length > 0) {
-          this.setData({
-            joinUserCount: res.data.length
-          })
-        }
-        console.log('[数据库event_joins] [查询总用户数] 成功: ', res.data.length)
-
+        console.log('[云函数getEventJoins调用] 成功: ', res.result)
+        this.setData({
+          joinUserCount: res.result.event_joins_counts
+        })
+        console.log('[云函数getEventJoins调用] 成功: ', res.result.event_joins.length)
       },
       fail: err => {
         wx.showToast({
           icon: 'none',
-          title: '查询记录失败'
+          title: '调用失败',
         })
-        console.error('[数据库] [查询记录] 失败：', err)
+        console.error('[云函数] [getEventJoins] 调用失败：', err)
       }
     })
+    
 
     //查询最近七个头像
     db.collection('event_joins').where({
@@ -104,8 +105,6 @@ Page({
             joinUsers: res.data
           })
         }
-        console.log('[数据库event_joins] [查询总用户数] 成功: ', res.data.length)
-
       },
       fail: err => {
         wx.showToast({

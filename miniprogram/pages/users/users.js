@@ -15,30 +15,32 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    const db = wx.cloud.database()
+
+
     // 查询参加总数
-    db.collection('event_joins').where({
-      event_id: 'XCYin4nnuWjciuy7'
-    }).limit(100).get({
+    wx.cloud.callFunction({
+      name: 'getEventJoins',
+      data: {
+        event_id: 'XCYin4nnuWjciuy7',
+      },
       success: res => {
-        if (res.data.length > 0) {
-          this.setData({
-            count: res.data.length,
-            users: res.data
-          })
-        }
-
-        console.log('[数据库event_joins] [查询总用户数] 成功: ', res.data)
-
+        console.log('[云函数getEventJoins调用] 成功: ', res.result)
+        this.setData({
+          count: res.result.event_joins_counts,
+          users: res.result.event_joins.data
+        })
+        console.log('[云函数getEventJoins调用] 成功: ', res.result.event_joins.length)
       },
       fail: err => {
         wx.showToast({
           icon: 'none',
-          title: '查询记录失败'
+          title: '调用失败',
         })
-        console.error('[数据库] [查询记录] 失败：', err)
+        console.error('[云函数] [getEventJoins] 调用失败：', err)
       }
     })
+
+
   },
 
   /**
