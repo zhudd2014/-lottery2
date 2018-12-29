@@ -138,7 +138,7 @@ Page({
 
 
     wx.cloud.callFunction({
-      name: 'getAdminOpenId',
+      name: 'isAdminByCloud',
       data: {
         openid: this.data.openid,
       },
