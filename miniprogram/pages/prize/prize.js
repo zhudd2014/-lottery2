@@ -79,6 +79,11 @@ Page({
      * 登记报名时，openid字段对不上，查询页查询不到
      */
   joinGame: function () {
+    
+    if (this.data.isParticipated) {
+      return
+    }
+
     const updateNum = this.data.join_nums + 1;
     const db = wx.cloud.database()
     db.collection('event_joins').add({
@@ -116,11 +121,7 @@ Page({
   onReady: function () {
 
   },
-  joinGame:function(){
-    if (this.data.isParticipated){
-      return
-    }
-  },
+
   goToUsers:function(){
     wx.navigateTo({
       url: '../users/users'
