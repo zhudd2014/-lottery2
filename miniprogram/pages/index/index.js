@@ -1,4 +1,5 @@
 //index.js
+import regeneratorRuntime from '../../libs/regenerator-runtime/runtime'
 const app = getApp()
 
 Page({
@@ -10,22 +11,10 @@ Page({
     requestResult: '',
     inited: true,
     isEmpty: false,
-    lotteries: [{
-      id: '1',
-      sponsor: '抽奖助手官方商城',
-      prizes: '便携手持挂烫机',
-      lotteryDate: '12月29日 15:00',
-      banner: '../../images/default-prize@3x.png'
-    }, {
-      id: '2',
-      sponsor: '抽奖助手官方商城',
-      prizes: '便携手持挂烫机',
-      lotteryDate: '12月29日 15:00',
-      banner: '../../images/default-prize@3x.png'
-    }]
+    lotteries: []
   },
 
-  onLoad: function () {
+  onLoad: function() {
     if (!wx.cloud) {
       wx.redirectTo({
         url: '../chooseLib/chooseLib',
@@ -50,8 +39,13 @@ Page({
       }
     })
   },
-
-  onGetUserInfo: function (e) {
+  onShow: async function () {
+    let lotteries = await this.getLotteries()
+    this.setData({
+      lotteries: lotteries
+    })
+  },
+  onGetUserInfo: function(e) {
     if (!this.logged && e.detail.userInfo) {
       this.setData({
         logged: true,
@@ -61,7 +55,7 @@ Page({
     }
   },
 
-  onGetOpenid: function () {
+  onGetOpenid: function() {
     // 调用云函数
     wx.cloud.callFunction({
       name: 'login',
@@ -81,10 +75,18 @@ Page({
       }
     })
   },
-  goToLottery: function (e) {
+  goToLottery: function(e) {
     console.log(e.currentTarget.dataset.index)
     wx.navigateTo({
       url: '../deployFunctions/deployFunctions',
     })
   },
+  getLotteries: async function() {
+    const db = wx.cloud.database()
+    let lotteries = await db.collection('lotteries').get().then(res => {
+      console.log(res.data)
+      return res.data
+    })
+    return lotteries
+  }
 })

@@ -1,0 +1,9 @@
+<!--miniprogram/pages/eventSuc/eventSuc.wxml-->
+<text>miniprogram/pages/eventSuc/eventSuc.wxml</text>
+
+<text>中奖者名单</text>
+<view>
+  <text>奖品：{{}}</text>
+  <text>头像：{{}}</text>
+  <text>{{event_suc}}</text>
+</view>
