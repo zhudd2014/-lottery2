@@ -5,7 +5,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    event_suc: '',
+    event_suc: [],
     event_suc_counts:0
   },
 

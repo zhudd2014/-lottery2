@@ -1,10 +1,10 @@
-<!--miniprogram/pages/eventSuc/eventSuc.wxml-->
-<text>miniprogram/pages/eventSuc/eventSuc.wxml</text>
-
-<text>中奖者名单</text>
-<text>中奖者人数{{event_suc_counts}}</text>
-<view>
-  <text>奖品：{{}}</text>
-  <text>头像：{{}}</text>
-  <text>{{event_suc}}</text>
-</view>
+ <view class='winner'>
+    <!-- <view class='result'>很遗憾, 你未中奖</view> -->
+    <view class='winner-userlist'>中奖者名单</view>
+    <view class="winner-list">
+      <view class="winner-user" wx:for="{{event_suc}}" wx:key="index">
+        <image mode="aspectFill" src="{{item.touxiang_pic}}"></image>
+        <view class='nike-name'>{{item.nick_name}}</view>
+      </view>
+    </view>
+  </view>

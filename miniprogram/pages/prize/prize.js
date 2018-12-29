@@ -13,6 +13,7 @@ Page({
     isParticipated: false,
     joinUserCount:0,
     joinUsers:10,
+    event_suc:[],
     status:0,//抽奖状态 0-参与中 1-待开奖 2-已开奖
   },
 
@@ -72,6 +73,29 @@ Page({
           title: '查询记录失败'
         })
         console.error('[数据库] [查询记录] 失败：', err)
+      }
+    })
+
+
+    wx.cloud.callFunction({
+      name: 'getEventSuc',
+      data: {
+        event_id: 'XCYin4nnuWjciuy7',
+      },
+      success: res => {
+        this.setData({
+          event_suc: res.result.getEventSucResult.data,
+          event_suc_counts: res.result.getEventSucResult.data.length
+        })
+        console.log('[云函数getEventSuc调用] 成功: ', res.result.getEventSucResult.data)
+
+      },
+      fail: err => {
+        wx.showToast({
+          icon: 'none',
+          title: '调用失败',
+        })
+        console.error('[云函数] [sum] 调用失败：', err)
       }
     })
   },

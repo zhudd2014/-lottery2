@@ -46,24 +46,23 @@
     </view>
   </view>
 
-</view>
-
-<view>
-
-<view class='winner'>
-  <view class='result'>很遗憾, 你未中奖</view>
-  <view class='winner-userlist'>中奖者名单</view>
-  <view class="winner-list">
-      <view class="winner-user" wx:for="{{joinUsers}}" wx:key="index">
-        <image mode="aspectFill" src="{{'https://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTL7WvPTBib2eJuDTGYaG9WCRfddNw51cibF2cQ1hAjvsxRr8uwdDHm9njLrDtD3hOIbGBrJGXttZJsQ/132'}}"></image>
-        <view class='nike-name'>xuyognhua</view>
+  <view class='winner'>
+    <!-- <view class='result'>很遗憾, 你未中奖</view> -->
+    <view class='winner-userlist'>中奖者名单</view>
+    <view class="winner-list">
+      <view class="winner-user" wx:for="{{event_suc}}" wx:key="index">
+        <image mode="aspectFill" src="{{item.touxiang_pic}}"></image>
+        <view class='nike-name'>{{item.nick_name}}</view>
       </view>
     </view>
-</view>
+  </view>
+
+  <view>
   <navigator url="../eventSuc/eventSuc" class="uploader-text ">
     <button>查看中奖名单</button>
   </navigator>
 </view>
-<view bindtap='addRandomOne'>  
-    <button>随机设置抽奖人</button>
+<view bindtap='addRandomOne'>
+  <button>随机设置抽奖人</button>
+</view>
 </view>

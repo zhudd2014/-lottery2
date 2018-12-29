@@ -31,22 +31,15 @@
   color: rgba(0, 0, 0, 0.9);
   line-height: 1.59;
   margin-top: 10px;
-  margin-left: 20px;
+  margin-left: 20rpx;
   margin-bottom: 10px;
 }
 
 .lottery-date {
-  margin-left: 20px;
+  margin-left: 20rpx;
   margin-bottom: 10px;
   font-size: 11px;
   color: #808080;
-}
-
-.split {
-  width: 100%;
-  height: 1rpx;
-  background-color: #dbd3d3;
-  margin-left: 20px;
 }
 
 .sponsor {
@@ -56,7 +49,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin: 20px;
+  margin: 20rpx;
 }
 
 .join-normal-lottery button {
@@ -253,6 +246,7 @@
 .winner {
   margin-bottom: 15px;
   background-color: #fff;
+  padding-bottom: 20rpx
 }
 
 .winner-list {
@@ -261,20 +255,19 @@
   align-content: center;
   align-items: center;
   justify-content: center;
-  /* margin: 20rpx; */
+  margin: 0 20rpx;
   padding-top: 12px;
   border: 1rpx solid #dbd3d3
 }
 
 .winner-user {
-  width: 250rpx;
+  width: 220rpx;
   /* height: 250rpx; */
   /* flex: 0 0 auto; */
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  /* margin: 10px 0 */
 }
 
 .winner-user image {
@@ -292,11 +285,12 @@
 .winner-userlist{
   font-size: 14px;
   color: #000;
-  margin: 20px;
+  margin: 20rpx;
+  padding-top: 20rpx
 }
 .result{
   font-size: 18px;
   font-weight: bold;
   color: #000;
-  margin: 20px;
+  margin: 20rpx;
 }
