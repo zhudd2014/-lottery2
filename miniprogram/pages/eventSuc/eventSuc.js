@@ -5,7 +5,8 @@ Page({
    * 页面的初始数据
    */
   data: {
-    event_suc: ''
+    event_suc: '',
+    event_suc_counts:0
   },
 
   /**
@@ -21,7 +22,8 @@ Page({
       },
       success: res => {
         this.setData({
-          event_suc: res.result.getEventSucResult,
+          event_suc: res.result.getEventSucResult.data,
+          event_suc_counts: res.result.getEventSucResult.data.length
         })
         console.log('[云函数getEventSuc调用] 成功: ', res.result.getEventSucResult.data)
      

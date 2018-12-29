@@ -9,22 +9,26 @@ cloud.init()
 // 云函数入口函数
 exports.main = async (event, context) => {
 
+  
   console.log(event)
   const wxContext = cloud.getWXContext()
   const db = cloud.database()
+  const _ = db.command
   const result = ''
   // 查询当前用户所有的 counters
-  let getEventSucResult =  await db.collection('event_success').where({
-    event_id: 'XCYin4nnuWjciuy7'
-  }).get({
+  let getEventSucResult =  await db.collection('event_joins').where({
+    event_id: 'XCYin4nnuWjciuy7',
+    level: _.gt(0)
+  }).orderBy('level','desc').get({
     success: res => {
-      result = JSON.stringify(res, null, 2);
+      result = res;
       return result;
     }
   });
 
   return {
     getEventSucResult: getEventSucResult,
+    sucResultCounts: getEventSucResult.length,
     event,
     openid: wxContext.OPENID,
     appid: wxContext.APPID,

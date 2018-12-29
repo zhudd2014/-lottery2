@@ -2,6 +2,7 @@
 <text>miniprogram/pages/eventSuc/eventSuc.wxml</text>
 
 <text>中奖者名单</text>
+<text>中奖者人数{{event_suc_counts}}</text>
 <view>
   <text>奖品：{{}}</text>
   <text>头像：{{}}</text>
