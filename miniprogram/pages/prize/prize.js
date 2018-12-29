@@ -93,6 +93,7 @@ Page({
         event_id: 'XCYin4nnuWjciuy7',
         touxiang_pic: app.globalData.userInfo.avatarUrl,
         nick_name: app.globalData.userInfo.nickName,
+        
         level:0
       },
       success: res => {

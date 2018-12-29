@@ -7,7 +7,7 @@ Page({
   data: {
     inited:true,
     count:0,
-    users:100,
+    users:[],
     userFlex: "flex: 0 0 10%;",
   },
 
@@ -23,11 +23,12 @@ Page({
       success: res => {
         if (res.data.length > 0) {
           this.setData({
-            count: res.data.length
+            count: res.data.length,
+            users: res.data
           })
         }
 
-        console.log('[数据库event_joins] [查询总用户数] 成功: ', res.data.length)
+        console.log('[数据库event_joins] [查询总用户数] 成功: ', res.data)
 
       },
       fail: err => {

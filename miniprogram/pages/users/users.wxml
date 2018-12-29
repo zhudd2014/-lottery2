@@ -10,7 +10,7 @@
         </view>
         <view class="join-users-list">
           <view class="join-users-user" style="{{userFlex}}" wx:for="{{users}}" wx:key="id">
-            <image lazyLoad="lazy-load" mode="aspectFill" src="{{'https://cdn.readhub.cn/mina/lottery/default-avatar-small.png'}}"></image>
+            <image lazyLoad="lazy-load" mode="aspectFill" src="{{item.touxiang_pic}}"></image>
           </view>
         </view>
         <view bindtap="loadMore" class="join-users-loadmore" hoverClass="highlight" wx:if="{{hasMore}}">{{loading?'加载中...':'加载更多'}}</view>
