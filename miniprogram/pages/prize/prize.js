@@ -9,7 +9,9 @@ Page({
   data: {
     imageStyle: "border-radius: 4px 4px 0px 0px;width: 100%; height: " + app.globalData.windowWidth / 2 + "px;",
     prize: {},
-    isParticipated:true
+    isParticipated:true,
+    joinUsers:7,
+    joinUserCount:2048
   },
 
   /**
@@ -28,48 +30,16 @@ Page({
   onReady: function () {
 
   },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
-  },
-
   joinGame:function(){
     if (this.data.isParticipated){
       return
     }
   },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
+  goToUsers:function(){
+    wx.navigateTo({
+      url: '../users/users'
+    })
   },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
-  },
-
   /**
    * 用户点击右上角分享
    */

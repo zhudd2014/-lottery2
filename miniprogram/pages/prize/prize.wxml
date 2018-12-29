@@ -29,4 +29,23 @@
       </button>
     </form>
   </view>
+
+  <view class="game-detail-users">
+    <view class="game-detail-users-banner">
+      <view class="game-detail-users-banner-value">
+        <text>已有 </text>
+        <text>{{joinUserCount}}</text>
+        <text> 人参与，</text>
+        <view bindtap="goToUsers" hoverClass="highlight">查看全部
+          <text class="arrow-right"></text>
+        </view>
+      </view>
+    </view>
+    <view class="game-detail-users-list">
+      <view class="game-detail-users-user" wx:for="{{joinUsers}}" wx:key="index">
+        <image mode="aspectFill" src="{{'https://cdn.readhub.cn/mina/lottery/default-avatar-small.png'}}"></image>
+      </view>
+    </view>
+  </view>
+
 </view>
