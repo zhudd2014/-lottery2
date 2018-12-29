@@ -93,8 +93,8 @@ Page({
         event_id: 'XCYin4nnuWjciuy7',
         touxiang_pic: app.globalData.userInfo.avatarUrl,
         nick_name: app.globalData.userInfo.nickName,
-        
-        level:0
+        level:0,
+        join_time:new Date()
       },
       success: res => {
         // 在返回结果中会包含新创建的记录的 _id
