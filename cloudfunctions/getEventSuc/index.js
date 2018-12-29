@@ -14,33 +14,17 @@ exports.main = async (event, context) => {
   const db = cloud.database()
   const result = ''
   // 查询当前用户所有的 counters
-  db.collection('event_success').where({
+  let getEventSucResult =  await db.collection('event_success').where({
     event_id: 'XCYin4nnuWjciuy7'
   }).get({
     success: res => {
       result = JSON.stringify(res, null, 2);
-    
-      return {
-        getEventSucResult: 'abc',
-        event,
-        openid: wxContext.OPENID,
-        appid: wxContext.APPID,
-        unionid: wxContext.UNIONID,
-      }
-    },
-    fail: err => {
-      return {
-        getEventSucResult: 'def',
-        event,
-        openid: wxContext.OPENID,
-        appid: wxContext.APPID,
-        unionid: wxContext.UNIONID,
-      }
+      return result;
     }
   });
 
   return {
-    getEventSucResult: 'xxx',
+    getEventSucResult: getEventSucResult,
     event,
     openid: wxContext.OPENID,
     appid: wxContext.APPID,

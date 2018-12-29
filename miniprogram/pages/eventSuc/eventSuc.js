@@ -20,10 +20,10 @@ Page({
         event_id: 'XCYin4nnuWjciuy7',
       },
       success: res => {
-        wx.showToast({
-          title: '调用成功',
+        this.setData({
+          event_suc: res.result.getEventSucResult,
         })
-        console.log('[云函数getEventSuc调用] 成功: ', res.result.getEventSucResult)
+        console.log('[云函数getEventSuc调用] 成功: ', res.result.getEventSucResult.data)
      
       },
       fail: err => {

@@ -49,3 +49,10 @@
   </view>
 
 </view>
+
+<view>
+  <navigator url="../eventSuc/eventSuc" class="uploader-text ">
+    <button>查看中奖名单</button>
+  </navigator>
+
+  </view>
