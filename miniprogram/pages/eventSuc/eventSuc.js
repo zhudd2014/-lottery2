@@ -11,6 +11,8 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
+
+  //TODO 中奖名单改为云函数较好一点
   onLoad: function(options) {
     wx.cloud.callFunction({
       name: 'getEventSuc',
@@ -21,7 +23,7 @@ Page({
         wx.showToast({
           title: '调用成功',
         })
-        console.log('[云函数getEventSuc调用] 成功: ', res.data)
+        console.log('[云函数getEventSuc调用] 成功: ', res.result.getEventSucResult)
      
       },
       fail: err => {
@@ -35,9 +37,9 @@ Page({
   },
 
 
-  // /**
-  //  * 生命周期函数--监听页面加载
-  //  */
+  /**
+   * 生命周期函数--监听页面加载
+   */
   // onLoad: function(options) {
   //   const db = wx.cloud.database()
   //   // 查询当前用户所有的 counters
