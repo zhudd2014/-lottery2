@@ -11,16 +11,16 @@ Page({
     prize: {},
     userInfo: app.globalData.userInfo,
     isParticipated: false,
-    joinUserCount:0,
-    joinUsers:10,
+    joinUserCount: 0,
+    joinUsers: [],
     event_suc:[],
-    status:0,//抽奖状态 0-参与中 1-待开奖 2-已开奖
+    status: 0,//抽奖状态 0-参与中 1-待开奖 2-已开奖
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function(options) {
+  onLoad: function (options) {
     let prize = JSON.parse(options.prize);
     this.setData({
       prize: prize
@@ -76,6 +76,27 @@ Page({
       }
     })
 
+    //查询最近七个头像
+    db.collection('event_joins').where({
+      event_id: 'XCYin4nnuWjciuy7'
+    }).orderBy('join_time', 'desc').limit(7).get({
+      success: res => {
+        if (res.data.length > 0) {
+          this.setData({
+            joinUsers: res.data
+          })
+        }
+        console.log('[数据库event_joins] [查询总用户数] 成功: ', res.data.length)
+
+      },
+      fail: err => {
+        wx.showToast({
+          icon: 'none',
+          title: '查询记录失败'
+        })
+        console.error('[数据库] [查询记录] 失败：', err)
+      }
+    })
 
     wx.cloud.callFunction({
       name: 'getEventSuc',
@@ -104,7 +125,7 @@ Page({
   /**
    * 登记报名时，openid字段对不上，查询页查询不到
    */
-  joinGame: function() {
+  joinGame: function () {
 
     if (this.data.isParticipated) {
       return
@@ -117,8 +138,8 @@ Page({
         event_id: 'XCYin4nnuWjciuy7',
         touxiang_pic: app.globalData.userInfo.avatarUrl,
         nick_name: app.globalData.userInfo.nickName,
-        level:0,
-        join_time:new Date()
+        level: 0,
+        join_time: new Date()
       },
       success: res => {
         // 在返回结果中会包含新创建的记录的 _id
@@ -146,11 +167,11 @@ Page({
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function() {
+  onReady: function () {
 
   },
   //随机设置一位抽奖者
-  addRandomOne: function() {
+  addRandomOne: function () {
 
     const db = wx.cloud.database();
 
@@ -169,7 +190,7 @@ Page({
         const updateId = res.data[random]._id;
         //取中奖人的数据
         console.log('[数据库event_joins] [生成随机数] 成功，中奖人id ', updateId)
-        
+
         db.collection('event_joins').doc(updateId).update({
 
           data: {
@@ -186,7 +207,7 @@ Page({
   },
 
 
-  goToUsers: function() {
+  goToUsers: function () {
     wx.navigateTo({
       url: '../users/users'
     })
@@ -194,7 +215,7 @@ Page({
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function() {
+  onShareAppMessage: function () {
 
   },
 })

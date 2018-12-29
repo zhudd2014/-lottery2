@@ -41,7 +41,7 @@
     </view>
     <view class="game-detail-users-list">
       <view class="game-detail-users-user" wx:for="{{joinUsers}}" wx:key="index">
-        <image mode="aspectFill" src="{{'https://cdn.readhub.cn/mina/lottery/default-avatar-small.png'}}"></image>
+        <image lazyLoad="lazy-load" mode="aspectFill" src="{{item.touxiang_pic}}"></image>
       </view>
     </view>
   </view>
@@ -58,6 +58,10 @@
   </view>
 
   <view>
+
+</view>
+
+<view>
   <navigator url="../eventSuc/eventSuc" class="uploader-text ">
     <button>查看中奖名单</button>
   </navigator>
@@ -66,3 +70,5 @@
   <button>随机设置抽奖人</button>
 </view>
 </view>
+
+
