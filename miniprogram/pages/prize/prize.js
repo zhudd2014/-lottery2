@@ -9,18 +9,25 @@ Page({
   data: {
     imageStyle: "border-radius: 4px 4px 0px 0px;width: 100%; height: " + app.globalData.windowWidth / 2 + "px;",
     prize: {},
-    userInfo: app.globalData.userInfo,
+    userInfo: null,
     isParticipated: false,
     joinUserCount: 0,
     joinUsers: [],
-    event_suc:[],
-    status: 0,//抽奖状态 0-参与中 1-待开奖 2-已开奖
+    event_suc: [],
+    status: 0, //抽奖状态 0-参与中 1-待开奖 2-已开奖
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
+  onLoad: function(options) {
+    if (wx.getStorageSync('userInfo')){
+      let userInfo = JSON.parse(wx.getStorageSync('userInfo'));
+      this.setData({
+        userInfo: userInfo
+      })
+    }
+    
     let prize = JSON.parse(options.prize);
     this.setData({
       prize: prize
@@ -125,7 +132,7 @@ Page({
   /**
    * 登记报名时，openid字段对不上，查询页查询不到
    */
-  joinGame: function () {
+  joinGame: function() {
 
     if (this.data.isParticipated) {
       return
@@ -136,8 +143,8 @@ Page({
     db.collection('event_joins').add({
       data: {
         event_id: 'XCYin4nnuWjciuy7',
-        touxiang_pic: app.globalData.userInfo.avatarUrl,
-        nick_name: app.globalData.userInfo.nickName,
+        touxiang_pic: this.data.userInfo.avatarUrl,
+        nick_name: this.data.userInfo.nickName,
         level: 0,
         join_time: new Date()
       },
@@ -167,11 +174,11 @@ Page({
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function () {
+  onReady: function() {
 
   },
   //随机设置一位抽奖者
-  addRandomOne: function () {
+  addRandomOne: function() {
 
     const db = wx.cloud.database();
 
@@ -207,7 +214,7 @@ Page({
   },
 
 
-  goToUsers: function () {
+  goToUsers: function() {
     wx.navigateTo({
       url: '../users/users'
     })
@@ -215,7 +222,7 @@ Page({
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function () {
+  onShareAppMessage: function() {
 
   },
 })
