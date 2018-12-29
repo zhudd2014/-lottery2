@@ -46,7 +46,7 @@
     </view>
   </view>
 
-  <view class='winner'>
+  <view class='winner' wx:if="{{status==2}}">
     <!-- <view class='result'>很遗憾, 你未中奖</view> -->
     <view class='winner-userlist'>中奖者名单</view>
     <view class="winner-list">
@@ -61,13 +61,16 @@
 
 </view>
 
-<view>
+<view wx:if="{{isAdmin}}">
   <navigator url="../eventSuc/eventSuc" class="uploader-text ">
     <button>查看中奖名单</button>
   </navigator>
 </view>
-<view bindtap='addRandomOne'>
+<view bindtap='addRandomOne' wx:if="{{isAdmin}}">
   <button>随机设置抽奖人</button>
+</view>
+<view bindtap='done' wx:if="{{isAdmin}}">
+  <button>开奖</button>
 </view>
 </view>
 
