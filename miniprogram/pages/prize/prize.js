@@ -208,62 +208,6 @@ Page({
   onReady: function() {
 
   },
-  //随机设置一位抽奖者
-  addRandomOne: function() {
-
-    wx.cloud.callFunction({
-      name: 'addRandomOne',
-      data: {
-        
-      },
-      success: res => {
-        this.setData({
-          result: res,
-        })
-        console.log('[云函数addRandomOne调用] 成功: ', res)
-
-      },
-      fail: err => {
-        wx.showToast({
-          icon: 'none',
-          title: '调用失败',
-        })
-        console.error('[云函数] [addRandomOne] 调用失败：', err)
-      }
-    })
-    // const db = wx.cloud.database();
-
-    // db.collection('event_joins').where({
-    //   event_id: 'XCYin4nnuWjciuy7',
-    //   level: 0
-    // }).get({
-    //   success: res => {
-    //     const length = res.data.length;
-
-    //     //随机一个 更新为中奖
-    //     const random = Math.floor(Math.random() * (length + 1));
-    //     console.log('[数据库event_joins] [查询未中奖人] 成功，人数: ', length)
-    //     console.log('[数据库event_joins] [生成随机数] 成功，设置中将人: ', random)
-
-    //     const updateId = res.data[random]._id;
-    //     //取中奖人的数据
-    //     console.log('[数据库event_joins] [生成随机数] 成功，中奖人id ', updateId)
-
-    //     db.collection('event_joins').doc(updateId).update({
-
-    //       data: {
-    //         level: 1,
-    //       },
-    //       success(res) {
-    //         console.log(res)
-    //       }
-    //     })
-
-    //   }
-
-    // });
-  },
-
 
   goToUsers: function() {
     wx.navigateTo({

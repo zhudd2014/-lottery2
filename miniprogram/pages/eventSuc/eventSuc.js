@@ -6,7 +6,9 @@ Page({
    */
   data: {
     event_suc: [],
-    event_suc_counts:0
+    event_suc_counts:0,
+    isAdmin:false,
+    event_id:'XCYin4nnuWjciuy7'
   },
 
   /**
@@ -33,7 +35,28 @@ Page({
           icon: 'none',
           title: '调用失败',
         })
-        console.error('[云函数] [sum] 调用失败：', err)
+        console.error('[云函数] [getEventSuc] 调用失败：', err)
+      }
+    })
+
+    wx.cloud.callFunction({
+      name: 'isAdminByCloud',
+      data: {
+        openid: this.data.openid,
+      },
+      success: res => {
+        this.setData({
+          isAdmin: res.result.isAdmin,
+        })
+        console.log('[云函数getAdminOpenId调用] 成功: ', res.result.isAdmin)
+
+      },
+      fail: err => {
+        wx.showToast({
+          icon: 'none',
+          title: '调用失败',
+        })
+        console.error('[云函数] [getAdminOpenId] 调用失败：', err)
       }
     })
   },
@@ -70,7 +93,57 @@ Page({
   onReady: function() {
 
   },
+  //随机设置一位抽奖者
+  addRandomOne: function () {
 
+    wx.cloud.callFunction({
+      name: 'addRandomOne',
+      data: {
+
+      },
+      success: res => {
+        this.setData({
+          result: res,
+        })
+        this.onLoad()
+        console.log('[云函数addRandomOne调用] 成功: ', res)
+
+      },
+      fail: err => {
+        wx.showToast({
+          icon: 'none',
+          title: '调用失败',
+        })
+        console.error('[云函数] [addRandomOne] 调用失败：', err)
+      }
+    })
+  },
+
+  //随机设置一位抽奖者
+  confirm: function () {
+
+    wx.cloud.callFunction({
+      name: 'confirm',
+      data: {
+        event_id:this.data.event_id
+      },
+      success: res => {
+        this.setData({
+          result: res,
+        })
+        this.onLoad()
+        console.log('[云函数confirm调用] 成功: ', res)
+
+      },
+      fail: err => {
+        wx.showToast({
+          icon: 'none',
+          title: '调用失败',
+        })
+        console.error('[云函数] [confirm] 调用失败：', err)
+      }
+    })
+  },
   /**
    * 生命周期函数--监听页面显示
    */
