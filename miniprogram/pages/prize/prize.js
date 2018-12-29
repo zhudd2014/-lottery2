@@ -15,6 +15,7 @@ Page({
     joinUsers: [],
     event_suc: [],
     status: 0, //抽奖状态 0-参与中 1-待开奖 2-已开奖
+    isAdmin:false
   },
 
   /**
@@ -116,6 +117,28 @@ Page({
           event_suc_counts: res.result.getEventSucResult.data.length
         })
         console.log('[云函数getEventSuc调用] 成功: ', res.result.getEventSucResult.data)
+
+      },
+      fail: err => {
+        wx.showToast({
+          icon: 'none',
+          title: '调用失败',
+        })
+        console.error('[云函数] [sum] 调用失败：', err)
+      }
+    })
+
+
+    wx.cloud.callFunction({
+      name: 'getAdminOpenId',
+      data: {
+        open_id: 'ovmWW5FHRmgEWUquGVNgiOMEdVV4',
+      },
+      success: res => {
+        this.setData({
+          isAdmin: res.result.isAdmin,
+        })
+        console.log('[云函数getAdminOpenId调用] 成功: ', res.result.isAdmin)
 
       },
       fail: err => {
