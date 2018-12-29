@@ -9,7 +9,7 @@ Page({
     describe: '',
     openid: '',
     join_nums: 0,
-    pics: '',
+    prize_pic: '',
     prize: '',
     prize_num: '',
     status: 0,
@@ -20,7 +20,7 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
+  onLoad: function(options) {
     if (app.globalData.openid) {
       this.setData({
         openid: app.globalData.openid
@@ -29,15 +29,15 @@ Page({
 
     const db = wx.cloud.database()
     // 查询当前用户所有的 counters
-    db.collection('event').where({
-      index: 1
+    db.collection('lotteries').where({
+      lottery_index: 'XCYin4nnuWjciuy7',
     }).get({
       success: res => {
         this.setData({
           queryResult: JSON.stringify(res.data, null, 2),
           title: res.data[0].title,
           describe: res.data[0].describe,
-          pics: res.data[0].pics,
+          prize_pic: res.data[0].prize_pic,
           prize_num: res.data[0].prize_num,
           status: res.data[0].status,
         })
@@ -105,63 +105,63 @@ Page({
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function () {
+  onReady: function() {
 
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function () {
+  onShow: function() {
 
   },
 
   /**
    * 生命周期函数--监听页面隐藏
    */
-  onHide: function () {
+  onHide: function() {
 
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
-  onUnload: function () {
+  onUnload: function() {
 
   },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
-  onPullDownRefresh: function () {
+  onPullDownRefresh: function() {
 
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
-  onReachBottom: function () {
+  onReachBottom: function() {
 
   },
 
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function () {
+  onShareAppMessage: function() {
 
   },
 
   /**
    * 登记报名时，openid字段对不上，查询页查询不到
    */
-  onAdd: function () {
+  onAdd: function() {
     const updateNum = this.data.join_nums + 1;
     const db = wx.cloud.database()
     db.collection('event_joins').add({
       data: {
         event_id: 'XCYin4nnuWjciuy7',
-        touxiang_pic: 'cloud://min520.6d69-min520/lottery/wx_tx_look.jpg',
-        nick_name: '张一',
+        touxiang_pic:'cloud://min520.6d69-min520/lottery/wx_tx_look.jpg',
+        nick_name:'张一',
       },
       success: res => {
         // 在返回结果中会包含新创建的记录的 _id

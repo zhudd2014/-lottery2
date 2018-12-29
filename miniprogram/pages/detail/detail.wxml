@@ -6,7 +6,7 @@
 <view class="guide">
   <text class="headline">奖品详情页</text>
 
-  <image class="uploader-image" src="{{pics}}"></image>
+  <image class="uploader-image" src="{{prize_pic}}"></image>
   <view>
     <text class="code" wx:if="{{title}}">{{title}}</text>
   </view>
