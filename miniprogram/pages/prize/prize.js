@@ -12,7 +12,7 @@ Page({
     userInfo: app.globalData.userInfo,
     isParticipated: false,
     joinUserCount:0,
-    joinUsers:10,
+    joinUsers:'',
     status:0,//抽奖状态 0-参与中 1-待开奖 2-已开奖
   },
 
@@ -74,6 +74,29 @@ Page({
         console.error('[数据库] [查询记录] 失败：', err)
       }
     })
+
+    //查询最近七个头像
+    db.collection('event_joins').where({
+      event_id: 'XCYin4nnuWjciuy7'
+    }).orderBy('join_time', 'desc').limit(7).get({
+      success: res => {
+        if (res.data.length > 0) {
+          this.setData({
+            joinUsers: res.data
+          })
+        }
+        console.log('[数据库event_joins] [查询总用户数] 成功: ', res.data.length)
+
+      },
+      fail: err => {
+        wx.showToast({
+          icon: 'none',
+          title: '查询记录失败'
+        })
+        console.error('[数据库] [查询记录] 失败：', err)
+      }
+    })
+
   },
 
 
