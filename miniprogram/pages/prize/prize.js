@@ -91,6 +91,7 @@ Page({
         event_id: 'XCYin4nnuWjciuy7',
         touxiang_pic: 'cloud://min520.6d69-min520/lottery/wx_tx_look.jpg',
         nick_name: '张一',
+        level:0
       },
       success: res => {
         // 在返回结果中会包含新创建的记录的 _id
