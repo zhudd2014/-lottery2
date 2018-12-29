@@ -4,10 +4,7 @@ const app = getApp()
 
 Page({
   data: {
-    avatarUrl: './user-unlogin.png',
-    userInfo: {},
-    logged: false,
-    takeSession: false,
+    userInfo: app.globalData.userInfo,
     requestResult: '',
     inited: true,
     isEmpty: false,
@@ -90,5 +87,20 @@ Page({
       return res.data
     })
     return lotteries
-  }
+  },
+  getUserInfo: function (e) {
+    console.log(e.detail.userInfo)
+    if (e.detail.userInfo == undefined) {
+      wx.showToast({
+        title: '授权才能抽奖哦',
+        icon: 'none',
+        duration: 2000
+      })
+      return
+    }
+    app.globalData.userInfo = e.detail.userInfo
+    this.setData({
+      userInfo: e.detail.userInfo
+    })
+  },
 })

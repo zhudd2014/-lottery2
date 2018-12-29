@@ -18,12 +18,10 @@
         <view animation="{{bgAnimationData}}" class="animate-bg"></view>
         <view class="content">
           <block wx:if="{{!isParticipated}}">
-            <image class="icon" src="https://cdn.readhub.cn/mina/lottery/icn-pi-join@3x.png" wx:if="{{game.theme==='funny'}}"></image>
             <text>参与抽奖</text>
           </block>
           <block wx:else>
-            <image class="icon" src="https://cdn.readhub.cn/mina/lottery/icn-pi-joined@3x.png" wx:if="{{game.theme==='funny'}}"></image>
-            <text>{{game.theme==='funny'?'已参与':'待开奖'}}</text>
+            <text>待开奖</text>
           </block>
         </view>
       </button>
@@ -51,8 +49,19 @@
 </view>
 
 <view>
+
+<view class='winner'>
+  <view class='result'>很遗憾, 你未中奖</view>
+  <view class='winner-userlist'>中奖者名单</view>
+  <view class="winner-list">
+      <view class="winner-user" wx:for="{{joinUsers}}" wx:key="index">
+        <image mode="aspectFill" src="{{'https://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTL7WvPTBib2eJuDTGYaG9WCRfddNw51cibF2cQ1hAjvsxRr8uwdDHm9njLrDtD3hOIbGBrJGXttZJsQ/132'}}"></image>
+        <view class='nike-name'>xuyognhua</view>
+      </view>
+    </view>
+</view>
   <navigator url="../eventSuc/eventSuc" class="uploader-text ">
     <button>查看中奖名单</button>
   </navigator>
 
-  </view>
+</view>

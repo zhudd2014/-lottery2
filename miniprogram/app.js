@@ -12,7 +12,8 @@ App({
     const res = wx.getSystemInfoSync();
 
     this.globalData = {
-      windowWidth: res.windowWidth
+      windowWidth: res.windowWidth,
+      userInfo:null
     }
   }
 })

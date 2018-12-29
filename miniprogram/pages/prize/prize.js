@@ -9,8 +9,10 @@ Page({
   data: {
     imageStyle: "border-radius: 4px 4px 0px 0px;width: 100%; height: " + app.globalData.windowWidth / 2 + "px;",
     prize: {},
+    userInfo: app.globalData.userInfo,
     isParticipated: false,
     joinUserCount:0,
+    joinUsers:10,
     status:0,//抽奖状态 0-参与中 1-待开奖 2-已开奖
   },
 
@@ -89,8 +91,8 @@ Page({
     db.collection('event_joins').add({
       data: {
         event_id: 'XCYin4nnuWjciuy7',
-        touxiang_pic: 'cloud://min520.6d69-min520/lottery/wx_tx_look.jpg',
-        nick_name: '张一',
+        touxiang_pic: app.globalData.userInfo.avatarUrl,
+        nick_name: app.globalData.userInfo.nickName,
         level:0
       },
       success: res => {
@@ -133,5 +135,5 @@ Page({
    */
   onShareAppMessage: function () {
 
-  }
+  },
 })
