@@ -19,7 +19,7 @@
         <view class="content">
           <block wx:if="{{!isParticipated}}">
             <image class="icon" src="https://cdn.readhub.cn/mina/lottery/icn-pi-join@3x.png" wx:if="{{game.theme==='funny'}}"></image>
-            <text bindtap='onParticipate'>参与抽奖</text>
+            <text>参与抽奖</text>
           </block>
           <block wx:else>
             <image class="icon" src="https://cdn.readhub.cn/mina/lottery/icn-pi-joined@3x.png" wx:if="{{game.theme==='funny'}}"></image>
