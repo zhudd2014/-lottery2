@@ -31,7 +31,7 @@
 </view>
 <view>
   <!-- 新建云函数 -->
-  <view class="uploader">
+  <!-- <view class="uploader">
     <navigator url="../detail/detail" open-type="navigate" class="uploader-text">
       <button>调到详情页</button>
     </navigator>
@@ -40,6 +40,6 @@
     <navigator url="../users/users" open-type="navigate" class="uploader-text">
       <button>调到参与用户页</button>
     </navigator>
-  </view>
+  </view> -->
 </view>
 
