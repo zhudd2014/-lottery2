@@ -160,6 +160,7 @@ Page({
     db.collection('event_joins').add({
       data: {
         event_id: 'XCYin4nnuWjciuy7',
+        touxiang_pic:'aa',
       },
       success: res => {
         // 在返回结果中会包含新创建的记录的 _id
@@ -178,7 +179,7 @@ Page({
       fail: err => {
         wx.showToast({
           icon: 'none',
-          title: '新增记录失败'
+          title: '报名成功，请勿重新报名'
         })
         console.error('[数据库] [新增记录] 失败：', err)
       }
