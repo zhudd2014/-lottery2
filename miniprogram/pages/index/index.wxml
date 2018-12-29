@@ -15,7 +15,8 @@
               <view class='lottery-info'>
                 <view class='sponsor'>{{item.sponsor}} 赞助</view>
                 <view class='prizes'>{{item.prizes}} ×{{item.count}}</view>
-                <view class='lottery-date'>{{dateUtil.dateFormat(item.lotteryDate)}} 自动开奖</view>
+                <view class='lottery-date' wx:if="{{!item.users}}">{{dateUtil.dateFormat(item.lotteryDate)}} 自动开奖</view>
+                <view class='lottery-date' wx:else>满{{item.users}}人 自动开奖</view>
               </view>
           </view>
         </view>
