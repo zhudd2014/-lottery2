@@ -32,14 +32,15 @@ Page({
     if (wx.getStorageSync('openid')) {
       let openid = wx.getStorageSync('openid');
       this.setData({
-        openid: openid
+        openid: openid,
       })
     }
     
     console.log('####openId: ', this.data.openid)
     let prize = JSON.parse(options.prize);
     this.setData({
-      prize: prize
+      prize: prize,
+      status: prize.status
     })
 
 
