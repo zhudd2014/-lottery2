@@ -101,10 +101,10 @@ Page({
   },
 
   //随机设置一位抽奖者
-  confirm: function () {
+  fill: function () {
 
     wx.cloud.callFunction({
-      name: 'confirm',
+      name: 'fill',
       data: {
         event_id:this.data.event_id
       },
@@ -112,7 +112,7 @@ Page({
         this.setData({
           result: res,
         })
-        this.onLoad()
+        this.onLoad({ event_id: this.data.event_id })
         console.log('[云函数confirm调用] 成功: ', res)
 
       },
@@ -124,6 +124,8 @@ Page({
         console.error('[云函数] [confirm] 调用失败：', err)
       }
     })
+
+    
   },
   /**
    * 生命周期函数--监听页面显示
@@ -131,29 +133,7 @@ Page({
   onShow: function() {
 
   },
-  testwinprize: function () {
-    wx.cloud.callFunction({
-      name: 'winAPrize',
-      data: {
-        
-      },
-      success: res => {
-        this.setData({
-          result: res,
-        })
-        this.onLoad()
-        console.log('[云函数winAPrize调用] 成功: ', res)
 
-      },
-      fail: err => {
-        wx.showToast({
-          icon: 'none',
-          title: '调用失败',
-        })
-        console.error('[云函数] [winAPrize] 调用失败：', err)
-      }
-    })
-  },
   
   /**
    * 生命周期函数--监听页面隐藏
