@@ -5,7 +5,8 @@ cloud.init()
 
 // 云函数入口函数
 exports.main = async (event, context) => {
-
+  
+  console.log('event'+event)
   console.log(event.userInfo.openId)
   let isAdmin = false
   if (event.userInfo.openId === 'ovmWW5FHRmgEWUquGVNgiOMEdVV4') {

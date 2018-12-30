@@ -141,6 +141,7 @@ Page({
     })
 
 
+    //TODO 此处isAdmin返回貌似不对
     wx.cloud.callFunction({
       name: 'isAdminByCloud',
       data: {
@@ -150,7 +151,7 @@ Page({
         this.setData({
           isAdmin: res.result.isAdmin,
         })
-        console.log('[云函数getAdminOpenId调用] 成功: ', res.result.isAdmin)
+        console.log('[云函数isAdminByCloud调用] 成功: ', res.result.isAdmin)
 
       },
       fail: err => {
@@ -158,9 +159,17 @@ Page({
           icon: 'none',
           title: '调用失败',
         })
-        console.error('[云函数] [getAdminOpenId] 调用失败：', err)
+        console.error('[云函数] [isAdminByCloud] 调用失败：', err)
       }
     })
+
+    
+    console.log('#####event_suc_counts' + this.data.event_suc_counts)
+    console.log('#####isAdmin'+this.data.isAdmin)
+    console.log('#####prize.reaching_users' + this.data.prize.reaching_users)
+    console.log('#####prize.status' + this.data.prize.status)
+    console.log('#####isParticipated' + this.data.isParticipated)
+    
   },
 
 
