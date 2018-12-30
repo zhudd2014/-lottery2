@@ -86,7 +86,7 @@ Page({
         this.setData({
           joinUserCount: res.result.event_joins_counts
         })
-        console.log('[云函数getEventJoins调用] 成功: ', res.result.event_joins.length)
+        console.log('[云函数getEventJoins调用] 成功: ', res.result.event_joins_counts)
       },
       fail: err => {
         wx.showToast({
@@ -207,7 +207,7 @@ Page({
     })
 
     //参与者到指定人数时，设置为待开奖
-    if (this.data.joinUserCount >= prize) {
+    if (this.data.joinUserCount >= this.data.prize.reaching_user) {
       wx.cloud.callFunction({
         name: 'updateLotteryPending',
         data: {
