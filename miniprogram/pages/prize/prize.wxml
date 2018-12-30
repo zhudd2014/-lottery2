@@ -2,7 +2,7 @@
 <view class='container'>
   <image mode="widthFix" src="{{prize.banner}}" style="{{imageStyle}}" lazy-load='true'></image>
   <view class='lottery-info'>
-    <view class='prizes'>{{prize.prizes}} ×{{prize.count}}</view>
+    <view class='prizes'>{{prize.prizes}}</view>
     <view class='lottery-date' wx:if="{{!prize.reaching_users}}">{{dateUtil.dateFormat(prize.lotteryDate)}} 自动开奖</view>
     <view class='lottery-date' wx:else>满{{prize.reaching_users}}人 自动开奖</view>
     <!-- <view class='split'></view>
