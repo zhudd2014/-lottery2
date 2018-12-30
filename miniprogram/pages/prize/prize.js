@@ -50,9 +50,7 @@ Page({
 
 
     const db = wx.cloud.database()
-    /**
-     * TODO 上线前检查isParticipated
-     */
+    
     db.collection('event_joins').where({
       _openid: this.data.openid,
       event_id: this.data.event_id,
@@ -60,11 +58,10 @@ Page({
       success: res => {
         if (res.data.length > 0) {
           this.setData({
-            isParticipated: false
+            isParticipated: true
           })
         }
         console.log('[数据库event_joins] [查询当前用户有无参加] 成功: ', res.data.length)
-
       },
       fail: err => {
         wx.showToast({
@@ -202,6 +199,7 @@ Page({
     
   },
 
+  
 
   /**
    * 登记报名时，openid字段对不上，查询页查询不到
