@@ -10,8 +10,9 @@ exports.main = async(event, context) => {
 
   const db = cloud.database();
 
+  console.log('event.event_id' + event.event_id)
   //取中奖人的数据
-  let updateZeroToOne = await db.collection('lottery').where({
+  let updateZeroToOne = await db.collection('lotteries').where({
     event_id: event.event_id,
     status: 0
   }).update({
@@ -24,6 +25,6 @@ exports.main = async(event, context) => {
   })
 
   return {
-    updateResult: updateResult
+    updateResult: updateZeroToOne
   }
 }

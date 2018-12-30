@@ -126,9 +126,10 @@ Page({
       success: res => {
         this.setData({
           event_suc: res.result.getEventSucResult.data,
-          event_suc_counts: res.result.getEventSucResult.data.length
+          event_suc_counts: res.result.sucResultCounts
         })
         console.log('[云函数getEventSuc调用] 成功: ', res.result.getEventSucResult.data)
+        console.log('[云函数getEventSuc调用] 成功event_suc_counts: ', res.result.sucResultCounts)
 
       },
       fail: err => {
@@ -198,6 +199,7 @@ Page({
           isParticipated: true,
           joinUserCount: updateNum
         })
+      
 
         wx.showToast({
           title: '报名成功',
@@ -216,7 +218,7 @@ Page({
     })
 
     //参与者到指定人数时，设置为待开奖
-    if (this.data.joinUserCount >= this.data.prize.reaching_user) {
+    if (this.data.joinUserCount >= this.data.prize.reaching_users) {
       wx.cloud.callFunction({
         name: 'updateLotteryPending',
         data: {
@@ -227,6 +229,8 @@ Page({
         }
       })
     }
+
+
   },
   /**
    * 生命周期函数--监听页面初次渲染完成

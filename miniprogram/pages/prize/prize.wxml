@@ -23,7 +23,7 @@
           <block wx:elif="{{isParticipated && prize.status == 0}}">
             <text>待开奖</text>
           </block>
-          <block wx:elif="{{prize.status == 1 && event_suc_counts >= prize.reaching_users}}">
+          <block wx:elif="{{prize.status == 1 && event_suc_counts >= prize.prize_num}}">
             <text>已开奖</text>
           </block>
           <block wx:else>
@@ -52,7 +52,7 @@
     </view>
   </view>
 
-  <view class='winner' wx:if="{{status==2}}">
+  <view class='winner' wx:if="{{prize.status == 1 && event_suc_counts >= prize.prize_num}}">
     <!-- <view class='result'>很遗憾, 你未中奖</view> -->
     <view class='winner-userlist'>中奖者名单</view>
     <view class="winner-list">

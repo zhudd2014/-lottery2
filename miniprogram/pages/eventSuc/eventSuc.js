@@ -86,7 +86,7 @@ Page({
         this.setData({
           result: res,
         })
-        this.onLoad()
+        this.onLoad({ event_id: this.data.event_id})
         console.log('[云函数addRandomOne调用] 成功: ', res)
 
       },
