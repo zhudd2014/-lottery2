@@ -21,7 +21,7 @@ exports.main = async(event, context) => {
 
   const length = res.data.length;
   //随机一个 更新为中奖
-  const random = Math.floor(Math.random() * (length + 1));
+  const random = Math.floor(Math.random() * (length));
   console.log('[数据库addRandomOne] [查询未中奖人] 成功，人数: ', length)
   console.log('[数据库addRandomOne] [生成随机数] 成功，随机数: ', random)
   console.log('[数据库addRandomOne] [设置中奖人id] 成功，中奖人id：', res.data[random]._id)
