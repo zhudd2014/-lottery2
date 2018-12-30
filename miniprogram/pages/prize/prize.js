@@ -18,7 +18,8 @@ Page({
     status: 0, //抽奖状态 0-参与中 1-待开奖 2-已开奖
     event_id: '',
     isAdmin: false,
-    openid: ''
+    openid: '',
+    result:'恭喜！你已中奖'
   },
 
   /**
@@ -160,6 +161,35 @@ Page({
           title: '调用失败',
         })
         console.error('[云函数] [isAdminByCloud] 调用失败：', err)
+      }
+    })
+
+    // 查询是否中奖
+    wx.cloud.callFunction({
+      name: 'winAPrize',
+      data: {
+        openid: this.data.openid,
+      },
+      success: res => {
+        console.log('[云函数winAPrize调用] 成功: ', res.result)
+        if (res.result.winAPrize){
+          this.setData({
+            result: '恭喜！你已中奖'
+          })
+        }else{
+          this.setData({
+            result: '很遗憾,你未中奖'
+          })
+        }
+        
+        console.log('[云函数winAPrize调用] 成功: ', res.result.winAPrize)
+      },
+      fail: err => {
+        wx.showToast({
+          icon: 'none',
+          title: '调用失败',
+        })
+        console.error('[云函数] [winAPrize] 调用失败：', err)
       }
     })
 
