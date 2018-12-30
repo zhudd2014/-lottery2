@@ -50,9 +50,8 @@ Page({
 
     const db = wx.cloud.database()
     /**
-     * TODO 此查询判断不准确
+     * TODO 上线前检查isParticipated
      */
-    // 查询当前用户有无参加
     db.collection('event_joins').where({
       _openid: this.data.openid,
       event_id: this.data.event_id,
@@ -204,6 +203,20 @@ Page({
         wx.showToast({
           title: '报名成功',
         })
+
+        //参与者到指定人数时，设置为待开奖
+        if (this.data.joinUserCount >= this.data.prize.reaching_users) {
+          wx.cloud.callFunction({
+            name: 'updateLotteryPending',
+            data: {
+              event_id: this.data.event_id,
+            },
+            success: res => {
+
+            }
+          })
+        }
+
         console.log('[数据库event_joins] [新增记录] 成功，记录 _id: ', open_id)
 
 
@@ -216,19 +229,6 @@ Page({
         console.error('[数据库] [新增记录] 失败：', err)
       }
     })
-
-    //参与者到指定人数时，设置为待开奖
-    if (this.data.joinUserCount >= this.data.prize.reaching_users) {
-      wx.cloud.callFunction({
-        name: 'updateLotteryPending',
-        data: {
-          event_id: this.data.event_id,
-        },
-        success: res => {
-
-        }
-      })
-    }
 
 
   },
