@@ -22,6 +22,9 @@
   <view bindtap='fill' wx:if="{{isAdmin}}">
     <button>随机设置抽奖人</button>
   </view>
+  <view bindtap='testwinprize' wx:if="{{isAdmin}}">
+    <button>testwinprize</button>
+  </view>
   <view bindtap='confirm' wx:if="{{isAdmin}}">
     <button>随机开奖</button>
   </view>

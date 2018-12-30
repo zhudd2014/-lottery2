@@ -131,7 +131,30 @@ Page({
   onShow: function() {
 
   },
+  testwinprize: function () {
+    wx.cloud.callFunction({
+      name: 'winAPrize',
+      data: {
+        
+      },
+      success: res => {
+        this.setData({
+          result: res,
+        })
+        this.onLoad()
+        console.log('[云函数winAPrize调用] 成功: ', res)
 
+      },
+      fail: err => {
+        wx.showToast({
+          icon: 'none',
+          title: '调用失败',
+        })
+        console.error('[云函数] [winAPrize] 调用失败：', err)
+      }
+    })
+  },
+  
   /**
    * 生命周期函数--监听页面隐藏
    */
