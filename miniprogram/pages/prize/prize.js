@@ -227,6 +227,7 @@ Page({
           joinUserCount: updateNum
         })
       
+        this.getJoiners(db)
 
         wx.showToast({
           title: '报名成功',
@@ -286,4 +287,25 @@ Page({
   onShareAppMessage: function() {
 
   },
+  getJoiners: function (db){
+    //查询最近七个头像
+    db.collection('event_joins').where({
+      event_id: this.data.event_id
+    }).orderBy('join_time', 'desc').limit(7).get({
+      success: res => {
+        if (res.data.length > 0) {
+          this.setData({
+            joinUsers: res.data
+          })
+        }
+      },
+      fail: err => {
+        wx.showToast({
+          icon: 'none',
+          title: '查询记录失败'
+        })
+        console.error('[数据库] [查询记录] 失败：', err)
+      }
+    })
+  }
 })
