@@ -1,0 +1,76 @@
+<view class='container'>
+  <image mode="widthFix" src="{{prize.banner}}" style="{{imageStyle}}" lazy-load='true'></image>
+  <view class='lottery-info'>
+    <!-- <view class='prizes'>{{prize.prizes}}</view> -->
+    <view class="prizes" wx:for="{{prize.prizes}}" wx:for-item="item" wx:key="index">
+      <block wx:if="{{prize.prizes.length>1}}">{{['一','二','三','四','五'][index]}}等奖 : {{item.name}}</block>
+    </view>
+    <view class='lottery-date'>{{prize.lotteryDate}} 自动开奖</view>
+    <!-- <view class='split'></view>
+    <view class='sponsor'>
+      <view>赞助商</view>
+      <view>{{prize.sponsor}}</view>
+    </view> -->
+  </view>
+
+  <view class="join-normal-lottery">
+    <form reportSubmit bindsubmit="joinGame">
+      <button animation="{{btnAnimationData}}" class="{{game.theme}} {{isParticipated?'joined':''}} {{game.condition_error?'disable':''}}" formType="submit" hoverClass="hover" hoverStartTime="{{0}}" hoverStayTime="{{0}}">
+        <view animation="{{bgAnimationData}}" class="animate-bg"></view>
+        <view class="content">
+          <block wx:if="{{!isParticipated && prize.status == 0}}">
+            <text>参与抽奖</text>
+          </block>
+          <block wx:elif="{{isParticipated && prize.status == 0}}">
+            <text>待开奖</text>
+          </block>
+          <block wx:elif="{{prize.status == 2}}">
+            <text>已开奖</text>
+          </block>
+          <block wx:else>
+            <text>待开奖</text>
+          </block>
+        </view>
+      </button>
+    </form>
+  </view>
+
+  <view class="game-detail-users">
+    <view class="game-detail-users-banner">
+      <view class="game-detail-users-banner-value">
+        <text>已有 </text>
+        <text>{{joinUserCount}}</text>
+        <text> 人参与，</text>
+        <view bindtap="goToUsers" hoverClass="highlight">查看全部
+          <text class="arrow-right"></text>
+        </view>
+      </view>
+    </view>
+    <view class="game-detail-users-list">
+      <view class="game-detail-users-user" wx:for="{{joinUsers}}" wx:key="index">
+        <image lazyLoad="lazy-load" mode="aspectFill" src="{{item.touxiang_pic}}"></image>
+      </view>
+    </view>
+  </view>
+
+  <view class='winner' wx:if="{{prize.status == 2}}">
+    <view class='result'>{{result}}</view>
+    <view class='result' style='text-align:center;font-size:26px' wx:if="{{winAPrize != ''}}">{{winAPrizeShowInfo}}</view>
+    <view class='winner-userlist'>中奖者名单</view>
+
+    <view wx:for="{{event_suc}}" wx:for-item="prize_info" wx:key="index" class='winner-item'>
+      <view class='winner-header'>{{['一','二','三','四','五','六'][index]}}等奖 : {{prize_info.name}} X{{prize_info.num}}</view>
+      <view class="winner-list">
+
+        <view class="winner-user" wx:for="{{prize_info.users_info}}" wx:for-item="user" wx:key="index">
+          <image mode="aspectFill" src="{{user.touxiang_pic}}"></image>
+          <view class='nike-name'>{{user.nick_name}}</view>
+        </view>
+
+      </view>
+    </view>
+
+
+  </view>
+
+</view>
